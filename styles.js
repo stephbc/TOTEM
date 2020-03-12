@@ -4,7 +4,7 @@ export default StyleSheet.create({
   view: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     backgroundColor: 'black',
   },
   Text: {
@@ -19,13 +19,15 @@ export default StyleSheet.create({
   },
   button: {
     backgroundColor: '#e75480',
-    padding: 20,
+    padding: 25,
     borderRadius: 15,
-    margin: 10,
+    margin: 45,
   },
   buttonText: {
     fontSize: 20,
     color: 'white',
+    fontWeight: 'bold',
+
   },
   photo: {
     flex: 1,

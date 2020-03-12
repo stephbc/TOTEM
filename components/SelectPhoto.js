@@ -2,9 +2,8 @@ import React from 'react';
 import { Image, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styles from '../styles.js'
-import { TakePhoto } from './TakePhoto'
 
-export const SelectPhoto = () => {
+export const SelectPhoto = ({ navigation }) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
 
   let openImagePickerAsync = async () => {
@@ -36,7 +35,7 @@ export const SelectPhoto = () => {
       <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
         <Text style={styles.buttonText}>CHOOSE FROM GALLERY</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={TakePhoto} style={styles.button}>
+      <TouchableOpacity onPress={() => navigation.navigate('CAMERA')} style={styles.button}>
         <Text style={styles.buttonText}>TAKE A NEW PIC</Text>
       </TouchableOpacity>
     </View>

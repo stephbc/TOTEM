@@ -7,69 +7,49 @@ import { FriendsScreen } from './components/FriendsScreen';
 import { TotemScreen } from './components/TotemScreen'
 import { Input } from './components/Input'
 import { SelectPhoto } from './components/SelectPhoto'
+import { TakePhoto } from './components/TakePhoto'
+// import { FinalSign } from './components/FinalSign';
 
 const Stack = createStackNavigator();
 
 export default App = () => {
   return (
     <NavigationContainer >
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerTitleAlign: 'center'
+        }}
+      >
         <Stack.Screen name='Home' component={HomeScreen}
           options={{
             title: 'TOTEM',
-            headerStyle: {
-              backgroundColor: 'black',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerTitleAlign: 'center'
           }}/>
-        <Stack.Screen name='TOTEM' component={TotemScreen}
-          options={{
-            headerStyle: {
-              backgroundColor: 'black',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerTitleAlign: 'center'
-          }}/>
+        <Stack.Screen name='TOTEM' component={TotemScreen}/>
         <Stack.Screen name='SIGN' component={Input}
           options={{
-            headerStyle: {
-              backgroundColor: 'black',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerTitleAlign: 'center'
+            headerShown: false
           }}/>
+        {/* <Stack.Screen name='FinalSign' component={FinalSign}
+          options={{
+            headerShown: false
+          }}/> */}
         <Stack.Screen name='PHOTO' component={SelectPhoto}
           options={{
-            headerStyle: {
-              backgroundColor: 'black',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerTitleAlign: 'center'
+            headerShown: false
           }}/>
-        <Stack.Screen name='FRIENDS' component={FriendsScreen}
+        <Stack.Screen name='CAMERA' component={TakePhoto}
           options={{
-            headerStyle: {
-              backgroundColor: 'black',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerTitleAlign: 'center'
-          }}/>
+            headerShown: false
+          }}
+        />
+        <Stack.Screen name='FRIENDS' component={FriendsScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

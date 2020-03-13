@@ -36,7 +36,7 @@ export const SelectPhoto = ({ navigation }) => {
         <Text style={styles.buttonText}>CHOOSE FROM GALLERY</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('CAMERA')} style={styles.button}>
-        <Text style={styles.buttonText}>TAKE A NEW PIC</Text>
+        <Text style={styles.buttonText}>TAKE A TEMPORARY PHOTO</Text>
       </TouchableOpacity>
     </View>
   );

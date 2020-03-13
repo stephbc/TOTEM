@@ -22,9 +22,9 @@ export const Input = ({ navigation }) => {
       <TouchableOpacity style={styles.button}
         onPress={() => {
           changeScreenOrientation()
-          navigation.navigate('FinalSign', { value: value})
+          navigation.navigate('FinalSign', { value: value })
         }}>
-        <Text style={styles.buttonText}>MAKE THIS SIGN</Text>
+        <Text style={styles.buttonText}>MAKE THIS SIGN!</Text>
       </TouchableOpacity>
     </View>
   );

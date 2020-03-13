@@ -37,8 +37,17 @@ export default StyleSheet.create({
   },
   signtext: {
     color: 'white',
-    fontSize: 100,
+    fontSize: 150,
     fontWeight: 'bold',
     textAlign: 'center'
+  },
+  cameraButtons: {
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  cameraIcons: {
+    color: "#fff",
+    fontSize: 40
   }
 });

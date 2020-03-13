@@ -1,6 +1,11 @@
 import React from 'react';
 import { TextInput, View, TouchableOpacity, Text } from 'react-native';
 import styles from '../styles'
+import { ScreenOrientation } from 'expo';
+
+async function changeScreenOrientation() {
+  await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
+}
 
 export const Input = ({ navigation }) => {
   const [value, onChangeText] = React.useState('');
@@ -13,14 +18,14 @@ export const Input = ({ navigation }) => {
         value={value}
         autoCapitalize="characters"
         multiline={true}
-        // defaultValue="stuff"
-        // onContentSizeChange
       />
-      {/* <TouchableOpacity style={styles.button}
-        onPress={navigation.navigate('FinalSign')} signText={value}
-      >
-        <Text style={styles.buttonText}>MAKE SIGN</Text>
-      </TouchableOpacity> */}
+      <TouchableOpacity style={styles.button}
+        onPress={() => {
+          changeScreenOrientation()
+          navigation.navigate('FinalSign', { value: value})
+        }}>
+        <Text style={styles.buttonText}>MAKE THIS SIGN</Text>
+      </TouchableOpacity>
     </View>
   );
 }

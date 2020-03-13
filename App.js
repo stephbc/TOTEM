@@ -8,7 +8,7 @@ import { TotemScreen } from './components/TotemScreen'
 import { Input } from './components/Input'
 import { SelectPhoto } from './components/SelectPhoto'
 import { TakePhoto } from './components/TakePhoto'
-// import { FinalSign } from './components/FinalSign';
+import { FinalSign } from './components/FinalSign';
 
 const Stack = createStackNavigator();
 
@@ -36,10 +36,10 @@ export default App = () => {
           options={{
             headerShown: false
           }}/>
-        {/* <Stack.Screen name='FinalSign' component={FinalSign}
+        <Stack.Screen name='FinalSign' component={FinalSign}
           options={{
             headerShown: false
-          }}/> */}
+          }}/>
         <Stack.Screen name='PHOTO' component={SelectPhoto}
           options={{
             headerShown: false

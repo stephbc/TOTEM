@@ -34,5 +34,11 @@ export default StyleSheet.create({
     width: 450,
     height: 450,
     resizeMode: "cover"
+  },
+  signtext: {
+    color: 'white',
+    fontSize: 100,
+    fontWeight: 'bold',
+    textAlign: 'center'
   }
 });

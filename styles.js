@@ -11,7 +11,8 @@ export default StyleSheet.create({
     backgroundColor: 'black',
   },
   Text: {
-    color: 'white'
+    color: 'white',
+    fontSize: 20
   },
   TextInput: {
     color: 'white',
@@ -59,5 +60,15 @@ export default StyleSheet.create({
   cameraIcons: {
     color: "#fff",
     fontSize: 40
-  }
+  },
+  scrollText: {
+    color: 'white',
+    fontSize: 20,
+  },
+  contactButton: {
+    backgroundColor: '#B3B3B3',
+    padding: 10,
+    borderRadius: 15,
+    margin: 5,
+  },
 });

@@ -1,65 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import styles from '../styles';
-import { ScrollView } from 'react-native-gesture-handler';
-
-// export const FriendsList = () => {
-//   let [nameNum, setNameNum] = React.useState([]);
-
-//   useEffect(() => {
-//     (async () => {
-//       const { status } = await Contacts.requestPermissionsAsync();
-//       if (status === 'granted') {
-//         const { data } = await Contacts.getContactsAsync({
-//           fields: [
-//             Contacts.Fields.Name,
-//             Contacts.Fields.PhoneNumbers
-//           ],
-//         })
-//         setNameNum({
-//           nameNum: data.map(contact => {
-//             let contObj = {}
-//             contObj.name = contact.name
-//             contObj.number = contact.phoneNumbers[0].number
-//             return contObj
-//           })
-//         })
-//       }
-//     })();
-//   }, []);
-
-//   console.log(nameNum)
-
-//   if(nameNum.length) {
-//     return (
-//       <View style={styles.view}>
-//         <Text style={styles.Text}>Contacts</Text>
-//         <ScrollView>
-//           {nameNum.forEach(contact => {
-//             return (
-//               <Text style={styles.Text}>
-//                 {contact.name}
-//               </Text>
-//             )
-//           })}
-//         </ScrollView>
-//       </View>
-//     );
-//   } else {
-//     return (
-//       <View style={styles.view}>
-//         <Text style={styles.Text}>
-//           You have no friends :(
-//         </Text>
-//       </View>
-//     )
-//   }
-// }
+import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
 
 export class FriendsList extends React.Component {
   state = {
-    nameNum: []
+    nameNum: [],
+    SOScontacts: []
   }
 
   async componentDidMount(){
@@ -87,23 +35,24 @@ export class FriendsList extends React.Component {
   }
 
   render(){
-    // console.log(this.state)
-    // return (
-    //   <View style={styles.view}>
-    //     <Text style={styles.Text}>FRIENDSHIP IS MAGIC</Text>
-    //   </View>
-    // )
-
+    console.log(this.state.SOScontacts)
     if(this.state.nameNum.length) {
       return (
         <View style={styles.view}>
-          <Text style={styles.Text}>Contacts</Text>
+          <Text style={styles.Text}>Send SOS to:</Text>
           <ScrollView>
             {this.state.nameNum.map(contact => {
               return (
-                <Text style={styles.Text} key={contact.number}>
-                  {contact.name}
-                </Text>
+                <TouchableHighlight
+                  key={contact.number}
+                  style={styles.contactButton}
+                  onPress={() => {
+                    if(!this.state.SOScontacts.includes(contact)){
+                      this.setState({ SOScontacts: [...this.state.SOScontacts, contact]})
+                    }
+                  }}>
+                  <Text style={styles.buttonText}>{contact.name} {contact.number}</Text>
+                </TouchableHighlight>
               )
             })}
           </ScrollView>

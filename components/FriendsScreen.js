@@ -21,7 +21,7 @@ export const FriendsScreen = ({ navigation }) => {
 
       <FriendsList />
       <TouchableOpacity style={styles.button} onPress={() => sendSOS()}>
-        <Text style={styles.buttonText}>SOS</Text>
+        <Text style={styles.buttonText}>Send SOS!</Text>
       </TouchableOpacity>
     </View>
   );

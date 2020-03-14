@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+let width = Dimensions.get('window').width; //full width
+let height = Dimensions.get('window').height;
 
 export default StyleSheet.create({
   view: {
@@ -27,7 +30,6 @@ export default StyleSheet.create({
     fontSize: 20,
     color: 'white',
     fontWeight: 'bold',
-
   },
   photo: {
     flex: 1,
@@ -37,9 +39,17 @@ export default StyleSheet.create({
   },
   signtext: {
     color: 'white',
-    fontSize: 150,
+    fontSize: 125,
+    // width: width,
+    // height: height,
     fontWeight: 'bold',
-    textAlign: 'center'
+    alignSelf: 'center',
+  },
+  signview: {
+    flex: 1,
+    // alignItems: 'stretch',
+    justifyContent: 'center',
+    backgroundColor: 'black',
   },
   cameraButtons: {
     alignSelf: 'flex-end',

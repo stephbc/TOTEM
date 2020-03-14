@@ -70,5 +70,13 @@ export default StyleSheet.create({
     padding: 10,
     borderRadius: 15,
     margin: 5,
+    alignItems: 'center'
   },
+  contactButtonPressed: {
+    backgroundColor: '#e75480',
+    padding: 10,
+    borderRadius: 15,
+    margin: 5,
+    alignItems: 'center'
+  }
 });

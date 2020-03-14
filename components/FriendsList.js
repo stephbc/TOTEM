@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import * as Contacts from 'expo-contacts';
+import * as SMS from 'expo-sms';
 import styles from '../styles';
-import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
 
 export class FriendsList extends React.Component {
   state = {
     nameNum: [],
-    SOScontacts: []
+    SOScontacts: [],
   }
 
   async componentDidMount(){
@@ -34,6 +35,13 @@ export class FriendsList extends React.Component {
     }
   }
 
+  sendSOS = async () => {
+    await SMS.sendSMSAsync(
+      this.state.SOScontacts,
+      'SOS! COME FIND ME PLEASE!'
+    )
+  }
+
   render(){
     console.log(this.state.SOScontacts)
     if(this.state.nameNum.length) {
@@ -43,19 +51,23 @@ export class FriendsList extends React.Component {
           <ScrollView>
             {this.state.nameNum.map(contact => {
               return (
-                <TouchableHighlight
+                <TouchableOpacity
                   key={contact.number}
                   style={styles.contactButton}
                   onPress={() => {
-                    if(!this.state.SOScontacts.includes(contact)){
-                      this.setState({ SOScontacts: [...this.state.SOScontacts, contact]})
+                    if(!this.state.SOScontacts.includes(contact.number)){
+                      this.setState({ SOScontacts: [...this.state.SOScontacts, contact.number]})
                     }
-                  }}>
-                  <Text style={styles.buttonText}>{contact.name} {contact.number}</Text>
-                </TouchableHighlight>
+                  }}
+                >
+                  <Text style={styles.buttonText}>{contact.name}</Text>
+                </TouchableOpacity>
               )
             })}
           </ScrollView>
+          <TouchableOpacity style={styles.button} onPress={() => this.sendSOS()}>
+            <Text style={styles.buttonText}>Send SOS!</Text>
+          </TouchableOpacity>
         </View>
       );
     } else {

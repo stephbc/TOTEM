@@ -55,7 +55,9 @@ export class FriendsList extends React.Component {
                   key={contact.number}
                   style={styles.contactButton}
                   onPress={() => {
-                    if(!this.state.SOScontacts.includes(contact.number)){
+                    if(this.state.SOScontacts.includes(contact.number)){
+                      this.setState({ SOScontacts: this.state.SOScontacts.filter(number => contact.number !== number)})
+                    } else {
                       this.setState({ SOScontacts: [...this.state.SOScontacts, contact.number]})
                     }
                   }}

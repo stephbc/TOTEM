@@ -9,7 +9,6 @@ export class FriendsButton extends React.Component {
   }
 
   render() {
-    // console.log(this.props)
     return (
       <TouchableOpacity
         style={ this.state.active? styles.contactButton : styles.contactButtonPressed}

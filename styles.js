@@ -22,7 +22,7 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   button: {
-    backgroundColor: '#e75480',
+    backgroundColor: '#F56960',
     padding: 25,
     borderRadius: 15,
     margin: 45,
@@ -73,7 +73,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   contactButtonPressed: {
-    backgroundColor: '#e75480',
+    backgroundColor: '#F56960',
     padding: 10,
     borderRadius: 15,
     margin: 5,

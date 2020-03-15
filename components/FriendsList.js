@@ -6,14 +6,19 @@ import * as SMS from 'expo-sms';
 import styles from '../styles';
 import { FriendsButton } from './FriendsButton'
 
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+
 export class FriendsList extends React.Component {
   state = {
     nameNum: [],
     SOScontacts: [],
+    location: null,
   }
 
   async componentDidMount(){
     this.getNameNums()
+    this._getLocationAsync();
   }
 
   getNameNums = async () => {
@@ -36,15 +41,29 @@ export class FriendsList extends React.Component {
     }
   }
 
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status === 'granted') {
+      let location = await Location.getCurrentPositionAsync({});
+      this.setState({ location });
+    }
+  };
+
   sendSOS = async () => {
-    await SMS.sendSMSAsync(
-      this.state.SOScontacts,
-      'SOS! COME FIND ME PLEASE!'
-    )
+    if (this.state.location) {
+      // let text = JSON.stringify(this.state.location);
+      await SMS.sendSMSAsync(
+        this.state.SOScontacts,
+        `SOS! COME FIND ME PLEASE! GPS location:
+        https://www.google.com/maps/search/?api=1&query=${this.state.location.coords.latitude},${this.state.location.coords.longitude}`
+        // longitude ${this.state.location.coords.longitude}, latitude ${this.state.location.coords.latitude}`
+      )
+    }
   }
 
   render(){
     console.log(this.state.SOScontacts)
+    console.log(this.state.location)
     if(this.state.nameNum.length) {
       return (
         <View style={styles.view}>
@@ -63,20 +82,6 @@ export class FriendsList extends React.Component {
                     }
                   }}
                 />
-
-                // <TouchableOpacity
-                //   key={contact.number}
-                //   style={styles.contactButton}
-                //   onPress={() => {
-                //     if(this.state.SOScontacts.includes(contact.number)){
-                //       this.setState({ SOScontacts: this.state.SOScontacts.filter(number => contact.number !== number)})
-                //     } else {
-                //       this.setState({ SOScontacts: [...this.state.SOScontacts, contact.number]})
-                //     }
-                //   }}
-                // >
-                //   <Text style={styles.buttonText}>{contact.name}</Text>
-                // </TouchableOpacity>
               )
             })}
           </ScrollView>

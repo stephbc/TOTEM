@@ -4,6 +4,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import * as Contacts from 'expo-contacts';
 import * as SMS from 'expo-sms';
 import styles from '../styles';
+import { FriendsButton } from './FriendsButton'
 
 export class FriendsList extends React.Component {
   state = {
@@ -51,9 +52,9 @@ export class FriendsList extends React.Component {
           <ScrollView>
             {this.state.nameNum.map(contact => {
               return (
-                <TouchableOpacity
+                <FriendsButton
                   key={contact.number}
-                  style={styles.contactButton}
+                  contact={contact}
                   onPress={() => {
                     if(this.state.SOScontacts.includes(contact.number)){
                       this.setState({ SOScontacts: this.state.SOScontacts.filter(number => contact.number !== number)})
@@ -61,9 +62,21 @@ export class FriendsList extends React.Component {
                       this.setState({ SOScontacts: [...this.state.SOScontacts, contact.number]})
                     }
                   }}
-                >
-                  <Text style={styles.buttonText}>{contact.name}</Text>
-                </TouchableOpacity>
+                />
+
+                // <TouchableOpacity
+                //   key={contact.number}
+                //   style={styles.contactButton}
+                //   onPress={() => {
+                //     if(this.state.SOScontacts.includes(contact.number)){
+                //       this.setState({ SOScontacts: this.state.SOScontacts.filter(number => contact.number !== number)})
+                //     } else {
+                //       this.setState({ SOScontacts: [...this.state.SOScontacts, contact.number]})
+                //     }
+                //   }}
+                // >
+                //   <Text style={styles.buttonText}>{contact.name}</Text>
+                // </TouchableOpacity>
               )
             })}
           </ScrollView>

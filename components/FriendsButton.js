@@ -1,24 +1,24 @@
 import React from 'react'
+import { Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from '../styles';
 
-export class FriendsContact extends React.Component {
-  constructor(props){
-    super(props)
-    state = {
-      active: true
-    }
+export class FriendsButton extends React.Component {
+  state = {
+    active: true
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <TouchableOpacity
         style={ this.state.active? styles.contactButton : styles.contactButtonPressed}
         onPress={() => {
-          this.setState({active: !this.state.active})
-        }}>
-        <Text style={styles.buttonText}>{contact.name}</Text>
+          this.setState({ active: !this.state.active })
+          this.props.onPress()
+        }}
+        >
+        <Text style={styles.buttonText}>{this.props.contact.name}</Text>
       </TouchableOpacity>
     )
   }

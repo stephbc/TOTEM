@@ -1,8 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-let width = Dimensions.get('window').width; //full width
-let height = Dimensions.get('window').height;
-
 export default StyleSheet.create({
   view: {
     flex: 1,
@@ -12,9 +9,11 @@ export default StyleSheet.create({
   },
   Text: {
     color: 'white',
-    fontSize: 20
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 10
   },
-  TextInput: {
+  textInput: {
     color: 'white',
     flex: 1,
     fontSize: 75,
@@ -37,20 +36,6 @@ export default StyleSheet.create({
     width: 450,
     height: 450,
     resizeMode: "cover"
-  },
-  signtext: {
-    color: 'white',
-    fontSize: 125,
-    // width: width,
-    // height: height,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-  signview: {
-    flex: 1,
-    // alignItems: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: 'black',
   },
   cameraButtons: {
     alignSelf: 'flex-end',

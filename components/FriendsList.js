@@ -64,7 +64,7 @@ export class FriendsList extends React.Component {
     if(this.state.nameNum.length) {
       return (
         <View style={styles.view}>
-          <Text style={styles.Text}>Send SOS to:</Text>
+          <Text style={styles.Text}>SEND SOS TO:</Text>
           <ScrollView>
             {this.state.nameNum.map(contact => {
               return (

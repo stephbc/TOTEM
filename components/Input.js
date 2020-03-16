@@ -13,7 +13,7 @@ export const Input = ({ navigation }) => {
   return (
     <View style={styles.view}>
       <TextInput
-        style={styles.TextInput}
+        style={styles.textInput}
         onChangeText={text => onChangeText(text)}
         value={value}
         autoCapitalize="characters"

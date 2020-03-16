@@ -3,11 +3,10 @@ import { View, Text } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import * as Contacts from 'expo-contacts';
 import * as SMS from 'expo-sms';
-import styles from '../styles';
-import { FriendsButton } from './FriendsButton'
-
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import styles from '../styles';
+import { FriendsButton } from './FriendsButton'
 
 export class FriendsList extends React.Component {
   state = {
@@ -51,19 +50,17 @@ export class FriendsList extends React.Component {
 
   sendSOS = async () => {
     if (this.state.location) {
-      // let text = JSON.stringify(this.state.location);
       await SMS.sendSMSAsync(
         this.state.SOScontacts,
         `SOS! COME FIND ME PLEASE! GPS location:
         https://www.google.com/maps/search/?api=1&query=${this.state.location.coords.latitude},${this.state.location.coords.longitude}`
-        // longitude ${this.state.location.coords.longitude}, latitude ${this.state.location.coords.latitude}`
       )
     }
   }
 
   render(){
-    console.log(this.state.SOScontacts)
-    console.log(this.state.location)
+    // console.log(this.state.SOScontacts)
+    // console.log(this.state.location)
     if(this.state.nameNum.length) {
       return (
         <View style={styles.view}>

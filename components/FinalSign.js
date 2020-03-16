@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, useFocusEffect } from 'react-native';
+import { useKeepAwake } from 'expo-keep-awake';
 import styles from '../styles'
 import { ScreenOrientation } from 'expo';
 
@@ -8,6 +9,7 @@ async function changeScreenOrientation() {
 }
 
 export const FinalSign = (props) => {
+  useKeepAwake();
 
   // useFocusEffect(
   //   React.useCallback(() => {

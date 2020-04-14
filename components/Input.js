@@ -2,13 +2,27 @@ import React from 'react';
 import { TextInput, View, TouchableOpacity, Text } from 'react-native';
 import styles from '../styles'
 import { ScreenOrientation } from 'expo';
+import { useFocusEffect } from '@react-navigation/native';
 
-async function changeScreenOrientation() {
+async function changeToLandscape() {
   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
+}
+
+async function changeToPortrait() {
+  await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
 }
 
 export const Input = ({ navigation }) => {
   const [value, onChangeText] = React.useState('');
+
+  useFocusEffect(
+    React.useCallback(() => {
+      changeToPortrait();
+      return () => {
+        ScreenOrientation.removeOrientationChangeListeners()
+      };
+    }, [])
+  );
 
   return (
     <View style={styles.view}>
@@ -21,8 +35,10 @@ export const Input = ({ navigation }) => {
       />
       <TouchableOpacity style={styles.button}
         onPress={() => {
-          changeScreenOrientation()
-          navigation.navigate('FinalSign', { value: value })
+          if(value){
+            changeToLandscape()
+            navigation.navigate('FinalSign', { value: value })
+          }
         }}>
         <Text style={styles.buttonText}>MAKE THIS SIGN!</Text>
       </TouchableOpacity>

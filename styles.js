@@ -1,11 +1,14 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+const { width } = Dimensions.get('window')
+
 export default StyleSheet.create({
   view: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'black',
+    // alignContent: 'center',
   },
   Text: {
     color: 'white',
@@ -33,9 +36,10 @@ export default StyleSheet.create({
   },
   photo: {
     flex: 1,
-    width: 450,
-    height: 450,
-    resizeMode: "cover"
+    width: width,
+    // height: 450,
+    // resizeMode: "contain",
+    // transform: [{ scale: 1 }]
   },
   cameraButtons: {
     alignSelf: 'flex-end',
@@ -63,5 +67,12 @@ export default StyleSheet.create({
     borderRadius: 15,
     margin: 5,
     alignItems: 'center'
-  }
+  },
+  // flashView: {
+  //   flex: 1,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   backgroundColor: 'white',
+  // alignContent: 'center',
+  // },
 });

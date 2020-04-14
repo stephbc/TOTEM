@@ -4,11 +4,11 @@ import styles from '../styles'
 import { ScreenOrientation } from 'expo';
 import { useFocusEffect } from '@react-navigation/native';
 
-async function changeToLandscape() {
+changeToLandscape = async () => {
   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
 }
 
-async function changeToPortrait() {
+changeToPortrait = async () => {
   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
 }
 

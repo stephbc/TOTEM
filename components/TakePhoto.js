@@ -4,6 +4,7 @@ import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from '../styles.js'
+import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 export class TakePhoto extends React.Component {
   state = {
@@ -46,10 +47,16 @@ export class TakePhoto extends React.Component {
     if (this.state.photo !== null) {
       return (
         <View style={styles.view}>
+          <ReactNativeZoomableView
+            maxZoom={3}
+            minZoom={0.5}
+            zoomStep={0.5}
+            initialZoom={1}
+            bindToBorders={true}
+            style={styles.view}
+          >
             <Image source={{ uri: this.state.photo.uri }} style={styles.photo} />
-          <TouchableOpacity onPress={() => this.setState({photo: null})} style={styles.button}>
-            <Text style={styles.buttonText}>Remove photo</Text>
-          </TouchableOpacity>
+          </ReactNativeZoomableView>
         </View>
       );
     }

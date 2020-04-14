@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Animated } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
 import styles from '../styles'
 
@@ -19,10 +19,31 @@ export const FinalSign = (props) => {
   }, [textHeight])
 
   // useEffect(() => {
-  //   if (textWidth > viewWidth || textHeight > viewHeight) {
-  //     setSize(size - 1) // <<< You may adjust value 1 to a smaller value so the text can be shrink more precisely
+  //   if (textWidth > viewWidth && textHeight > viewHeight) {
+  //     setSize(size - 0.5) // <<< You may adjust value 1 to a smaller value so the text can be shrink more precisely
   //   }
   // }, [textWidth, textHeight])
+
+  // const [flashStart] = useState(new Animated.Value(styles.view))
+
+  // const flashSign = async () => {
+  //   Animated.loop(
+  //     Animated.sequence([
+  //       Animated.timing(flashStart, {
+  //         toValue: styles.flashView,
+  //         duration: 500,
+  //         // delay: 1000
+  //       }),
+  //       Animated.timing(styles.flashView, {
+  //         toValue: flashStart,
+  //         duration: 500
+  //       })
+  //     ]),
+  //     {
+  //       iterations: 4
+  //     }
+  //   ).start()
+  // }
 
   return (
     <View style={styles.view}
@@ -31,25 +52,29 @@ export const FinalSign = (props) => {
         setViewHeight(height);
         // setViewWidth(width);
       }}>
+
+        {/* <Animated.View
+          style={[
+            { transform: [{backgroundColor: 'white'}] }
+          ]}
+        /> */}
+
       <Text
         style={{
           fontSize: size,
           color: 'white',
           fontWeight: 'bold',
-          // alignContent: 'stretch',
-          // alignItems: 'stretch',
-          // flexDirection: 'row',
           // alignSelf: 'center',
-          // justifyContent: 'space-evenly',
         }}
         onLayout={(event) => {
           var { x, y, width, height } = event.nativeEvent.layout;
           setTextHeight(height);
           // setTextWidth(width);
         }}
-        // onPress={() => {
-        //   props.navigation.goBack()
-        //   }}
+        onPress={() => {
+          // flashSign();
+          props.navigation.goBack()
+        }}
       >
         {props.route.params.value}
       </Text>

@@ -2,19 +2,20 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import { HomeScreen } from './components/HomeScreen';
 import { FriendsScreen } from './components/FriendsScreen';
-import { TotemScreen } from './components/TotemScreen'
-import { Input } from './components/Input'
-import { SelectPhoto } from './components/SelectPhoto'
-import { TakePhoto } from './components/TakePhoto'
+import { TotemScreen } from './components/TotemScreen';
+import { Input } from './components/Input';
+import { SelectPhoto } from './components/SelectPhoto';
 import { FinalSign } from './components/FinalSign';
+import { PhotoSign } from './components/PhotoSign';
 
 const Stack = createStackNavigator();
 
 export default App = () => {
   return (
-    <NavigationContainer >
+    <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
@@ -34,23 +35,22 @@ export default App = () => {
         <Stack.Screen name='TOTEM' component={TotemScreen}/>
         <Stack.Screen name='SIGN' component={Input}
           options={{
-            headerShown: false
+            headerShown: false,
           }}/>
         <Stack.Screen name='FinalSign' component={FinalSign}
           options={{
-            headerShown: false
+            headerShown: false,
           }}/>
         <Stack.Screen name='PHOTO' component={SelectPhoto}
           options={{
-            headerShown: false
+            headerShown: false,
           }}/>
-        {/* <Stack.Screen name='CAMERA' component={TakePhoto}
+        <Stack.Screen name='PhotoSign' component={PhotoSign}
           options={{
-            headerShown: false
-          }}
-        /> */}
+            headerShown: false,
+          }}/>
         <Stack.Screen name='FRIENDS' component={FriendsScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};

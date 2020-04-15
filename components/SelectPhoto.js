@@ -1,17 +1,17 @@
 import React from 'react';
-import { Image, Text, View, TouchableOpacity } from 'react-native';
-import { CameraRoll } from "@react-native-community/cameraroll";
+import { Text, View, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import styles from '../styles.js'
-import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+import CameraRoll from "@react-native-community/cameraroll";
+import styles from '../styles.js';
+import { PhotoSign } from './PhotoSign.js';
 
 export const SelectPhoto = ({ navigation }) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
 
   let openImagePickerAsync = async () => {
-    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
-    if (permissionResult.granted === false) {
+    const { status } = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+    if (status !== 'granted') {
       alert("Permission to access camera roll is required!");
       return;
     }
@@ -35,37 +35,26 @@ export const SelectPhoto = ({ navigation }) => {
       allowEditing: false,
       exif: true
     });
-    if (!result.cancelled) {
-      setSelectedImage({ localUri: result.uri });
+    if(result.cancelled === true) {
+      return;
     }
-    // if(result.uri){
-    //   savePic(result.uri)
-    // }
-  }
+    // setSelectedImage({ localUri: result.uri });
 
-  // let savePic = async (uri) => {
-    // console.log(selectedImage)
-    // let saved = await CameraRoll.saveToCameraRoll(uri);
-    // console.log(saved)
-    // if(saved){
-    //   selectedImage({localUri: saved})
+    // CameraRoll.saveToCameraRoll(result.uri)
+
+    // if(result.uri){
+      let saved = await CameraRoll.saveToCameraRoll(result.uri);
+      console.log(saved)
+      if(saved){
+        setSelectedImage({localUri: saved})
+      }
     // }
-  // }
+
+  }
 
   if (selectedImage !== null) {
     return (
-      <View style={styles.view}>
-        <ReactNativeZoomableView
-            maxZoom={3}
-            minZoom={0.5}
-            zoomStep={0.5}
-            initialZoom={1}
-            bindToBorders={true}
-            style={styles.view}
-          >
-            <Image source={{ uri: selectedImage.localUri }} style={styles.photo} />
-          </ReactNativeZoomableView>
-      </View>
+      <PhotoSign pic={selectedImage}></PhotoSign>
     );
   }
 

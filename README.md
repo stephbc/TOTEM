@@ -6,3 +6,5 @@ An app for festivals, raves and all your nights out!
 * It's too loud to hear each other! Let your group know you're off to get water, a drink, air, the next set, etc.
 * Write up a quick, friendly message to all the people whose toes you just trampled :)
 * SOS mode: send out an SOS text with your GPS location!
+
+![MainPage](/assets/mainpage.png)

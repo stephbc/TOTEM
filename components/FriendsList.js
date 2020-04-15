@@ -17,11 +17,12 @@ export class FriendsList extends React.Component {
 
   async componentDidMount(){
     this.getNameNums()
-    this._getLocationAsync();
+    this.getLocationAsync();
   }
 
   getNameNums = async () => {
     const { status } = await Contacts.requestPermissionsAsync();
+
     if (status === 'granted') {
       const { data } = await Contacts.getContactsAsync({
         fields: [
@@ -29,8 +30,11 @@ export class FriendsList extends React.Component {
           Contacts.Fields.PhoneNumbers
         ],
       })
+
+      const hasPhoneNum = data.filter(contact => contact.phoneNumbers)
+
       this.setState({
-        nameNum: data.map(contact => {
+        nameNum: hasPhoneNum.map(contact => {
           let contObj = {}
           contObj.name = contact.name
           contObj.number = contact.phoneNumbers[0].number
@@ -40,7 +44,7 @@ export class FriendsList extends React.Component {
     }
   }
 
-  _getLocationAsync = async () => {
+  getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status === 'granted') {
       let location = await Location.getCurrentPositionAsync({});
@@ -52,7 +56,7 @@ export class FriendsList extends React.Component {
     if (this.state.location) {
       await SMS.sendSMSAsync(
         this.state.SOScontacts,
-        `SOS! COME FIND ME PLEASE! GPS location:
+        `SOS! PLEASE COME FIND ME! GPS location:
         https://www.google.com/maps/search/?api=1&query=${this.state.location.coords.latitude},${this.state.location.coords.longitude}`
       )
     }

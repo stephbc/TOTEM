@@ -44,11 +44,11 @@ export default App = () => {
           options={{
             headerShown: false
           }}/>
-        <Stack.Screen name='CAMERA' component={TakePhoto}
+        {/* <Stack.Screen name='CAMERA' component={TakePhoto}
           options={{
             headerShown: false
           }}
-        />
+        /> */}
         <Stack.Screen name='FRIENDS' component={FriendsScreen}/>
       </Stack.Navigator>
     </NavigationContainer>

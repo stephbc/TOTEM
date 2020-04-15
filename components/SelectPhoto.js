@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image, Text, View, TouchableOpacity } from 'react-native';
+import { CameraRoll } from "@react-native-community/cameraroll";
 import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 import styles from '../styles.js'
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
@@ -19,6 +21,36 @@ export const SelectPhoto = ({ navigation }) => {
     }
     setSelectedImage({ localUri: pickerResult.uri });
   }
+
+  let openCameraAsync = async () => {
+    const { status } = await Permissions.getAsync(
+      Permissions.CAMERA,
+      Permissions.CAMERA_ROLL
+    );
+    if (status !== 'granted') {
+      alert("Permission to access camera is required!");
+      return;
+    }
+    let result = await ImagePicker.launchCameraAsync({
+      allowEditing: false,
+      exif: true
+    });
+    if (!result.cancelled) {
+      setSelectedImage({ localUri: result.uri });
+    }
+    // if(result.uri){
+    //   savePic(result.uri)
+    // }
+  }
+
+  // let savePic = async (uri) => {
+    // console.log(selectedImage)
+    // let saved = await CameraRoll.saveToCameraRoll(uri);
+    // console.log(saved)
+    // if(saved){
+    //   selectedImage({localUri: saved})
+    // }
+  // }
 
   if (selectedImage !== null) {
     return (
@@ -44,9 +76,13 @@ export const SelectPhoto = ({ navigation }) => {
         <Text style={styles.buttonText}>CHOOSE FROM GALLERY</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('CAMERA')} style={styles.button}>
+      <TouchableOpacity onPress={openCameraAsync} style={styles.button}>
         <Text style={styles.buttonText}>TAKE A TEMPORARY PHOTO</Text>
       </TouchableOpacity>
+
+      {/* <TouchableOpacity onPress={() => navigation.navigate('CAMERA')} style={styles.button}>
+        <Text style={styles.buttonText}>TAKE A TEMPORARY PHOTO</Text>
+      </TouchableOpacity> */}
 
     </View>
   );

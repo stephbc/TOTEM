@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@dudigital/react-native-zoomable-view": "^1.0.15",
+    "@react-native-community/cameraroll": "^1.5.2",
     "@react-native-community/masked-view": "0.1.5",
     "@react-navigation/native": "^5.0.9",
     "@react-navigation/stack": "^5.1.1",
@@ -21,6 +22,7 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-cameraroll": "^1.0.0-alpha2",
     "react-native-fbsdk": "^1.1.2",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-reanimated": "~1.4.0",

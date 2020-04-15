@@ -37,9 +37,9 @@ export default StyleSheet.create({
   photo: {
     flex: 1,
     width: width,
-    // height: 450,
-    // resizeMode: "contain",
-    // transform: [{ scale: 1 }]
+    height: 450,
+    resizeMode: "contain",
+    transform: [{ scale: 1 }]
   },
   cameraButtons: {
     alignSelf: 'flex-end',

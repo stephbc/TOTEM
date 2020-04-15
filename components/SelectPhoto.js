@@ -9,7 +9,7 @@ import { PhotoSign } from './PhotoSign.js';
 export const SelectPhoto = ({ navigation }) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
 
-  let openImagePickerAsync = async () => {
+  const openImagePickerAsync = async () => {
     const { status } = await Permissions.getAsync(Permissions.CAMERA_ROLL);
     if (status !== 'granted') {
       alert("Permission to access camera roll is required!");
@@ -22,7 +22,7 @@ export const SelectPhoto = ({ navigation }) => {
     setSelectedImage({ localUri: pickerResult.uri });
   }
 
-  let openCameraAsync = async () => {
+  const openCameraAsync = async () => {
     const { status } = await Permissions.getAsync(
       Permissions.CAMERA,
       Permissions.CAMERA_ROLL
@@ -38,18 +38,8 @@ export const SelectPhoto = ({ navigation }) => {
     if(result.cancelled === true) {
       return;
     }
-    // setSelectedImage({ localUri: result.uri });
-
-    // CameraRoll.saveToCameraRoll(result.uri)
-
-    // if(result.uri){
-      let saved = await CameraRoll.saveToCameraRoll(result.uri);
-      console.log(saved)
-      if(saved){
-        setSelectedImage({localUri: saved})
-      }
-    // }
-
+    setSelectedImage({ localUri: result.uri });
+    // CameraRoll.saveToCameraRoll(result.uri);
   }
 
   if (selectedImage !== null) {

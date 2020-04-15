@@ -8,7 +8,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'black',
-    // alignContent: 'center',
+    alignContent: 'center',
   },
   Text: {
     color: 'white',
@@ -37,18 +37,8 @@ export default StyleSheet.create({
   photo: {
     flex: 1,
     width: width,
-    height: 450,
+    // height: 450,
     resizeMode: "contain",
-    transform: [{ scale: 1 }]
-  },
-  cameraButtons: {
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  cameraIcons: {
-    color: "#fff",
-    fontSize: 40
   },
   scrollText: {
     color: 'white',
@@ -68,11 +58,11 @@ export default StyleSheet.create({
     margin: 5,
     alignItems: 'center'
   },
-  // flashView: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   backgroundColor: 'white',
-  // alignContent: 'center',
-  // },
+  flashView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    alignContent: 'center',
+  },
 });

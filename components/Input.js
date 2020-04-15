@@ -28,10 +28,13 @@ export const Input = ({ navigation }) => {
     <View style={styles.view}>
       <TextInput
         style={styles.textInput}
+        placeholder="TAP HERE START TYPING"
+        placeholderTextColor="#555555"
         onChangeText={text => onChangeText(text)}
         value={value}
         autoCapitalize="characters"
         multiline={true}
+        maxLength={50}
       />
       <TouchableOpacity style={styles.button}
         onPress={() => {

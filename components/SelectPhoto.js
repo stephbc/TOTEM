@@ -4,7 +4,6 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import CameraRoll from "@react-native-community/cameraroll";
 import styles from '../styles.js';
-import { PhotoSign } from './PhotoSign.js';
 
 export const SelectPhoto = ({ navigation }) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
@@ -39,13 +38,16 @@ export const SelectPhoto = ({ navigation }) => {
       return;
     }
     setSelectedImage({ localUri: result.uri });
-    // CameraRoll.saveToCameraRoll(result.uri);
+    // saveToRoll(result);
+  }
+
+  saveToRoll = async (result) => {
+    let savedPhoto = await CameraRoll.saveToCameraRoll(result.uri, 'photo');
+    setSelectedImage({ localUri: savedPhoto });
   }
 
   if (selectedImage !== null) {
-    return (
-      <PhotoSign pic={selectedImage}></PhotoSign>
-    );
+    navigation.navigate('PhotoSign', { pic: selectedImage });
   }
 
   return (

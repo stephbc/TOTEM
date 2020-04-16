@@ -17,7 +17,10 @@ export const PhotoSign = (props) => {
           bindToBorders={true}
           style={styles.view}
         >
-          <Image source={{ uri: props.pic.localUri }} style={styles.photo} />
+          <Image
+            source={{ uri: props.route.params.pic.localUri }}
+            style={styles.photo}
+          />
         </ReactNativeZoomableView>
     </View>
   )

@@ -3,7 +3,6 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import * as Permissions from 'expo-permissions';
-// import CameraRoll from "@react-native-community/cameraroll";
 import styles from '../styles.js';
 
 export const SelectPhoto = ({ navigation }) => {
@@ -61,10 +60,6 @@ export const SelectPhoto = ({ navigation }) => {
       <TouchableOpacity onPress={openCameraAsync} style={styles.button}>
         <Text style={styles.buttonText}>TAKE A PHOTO</Text>
       </TouchableOpacity>
-
-      {/* <TouchableOpacity onPress={() => navigation.navigate('CAMERA')} style={styles.button}>
-        <Text style={styles.buttonText}>TAKE A TEMPORARY PHOTO</Text>
-      </TouchableOpacity> */}
 
     </View>
   );

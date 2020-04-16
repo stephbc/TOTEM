@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
 import * as Permissions from 'expo-permissions';
-import CameraRoll from "@react-native-community/cameraroll";
+// import CameraRoll from "@react-native-community/cameraroll";
 import styles from '../styles.js';
 
 export const SelectPhoto = ({ navigation }) => {
@@ -14,6 +15,7 @@ export const SelectPhoto = ({ navigation }) => {
       alert("Permission to access camera roll is required!");
       return;
     }
+
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
     if (pickerResult.cancelled === true) {
       return;
@@ -30,6 +32,7 @@ export const SelectPhoto = ({ navigation }) => {
       alert("Permission to access camera is required!");
       return;
     }
+
     let result = await ImagePicker.launchCameraAsync({
       allowEditing: false,
       exif: true
@@ -37,13 +40,11 @@ export const SelectPhoto = ({ navigation }) => {
     if(result.cancelled === true) {
       return;
     }
-    setSelectedImage({ localUri: result.uri });
-    // saveToRoll(result);
-  }
 
-  saveToRoll = async (result) => {
-    let savedPhoto = await CameraRoll.saveToCameraRoll(result.uri, 'photo');
-    setSelectedImage({ localUri: savedPhoto });
+    const asset = await MediaLibrary.createAssetAsync(result.uri);
+    MediaLibrary.createAlbumAsync('Totem', asset);
+
+    setSelectedImage({ localUri: result.uri });
   }
 
   if (selectedImage !== null) {
@@ -58,7 +59,7 @@ export const SelectPhoto = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={openCameraAsync} style={styles.button}>
-        <Text style={styles.buttonText}>TAKE A TEMPORARY PHOTO</Text>
+        <Text style={styles.buttonText}>TAKE A PHOTO</Text>
       </TouchableOpacity>
 
       {/* <TouchableOpacity onPress={() => navigation.navigate('CAMERA')} style={styles.button}>

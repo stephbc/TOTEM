@@ -49,7 +49,10 @@ export class FriendsList extends React.Component {
     if (status === 'granted') {
       let location = await Location.getCurrentPositionAsync({});
       this.setState({ location });
-    }
+    } else {
+        alert("Permission to access location is required!");
+        return;
+      }
   };
 
   sendSOS = async () => {
@@ -68,7 +71,7 @@ export class FriendsList extends React.Component {
     if(this.state.nameNum.length) {
       return (
         <View style={styles.view}>
-          <Text style={styles.Text}>SEND SOS TO:</Text>
+          <Text style={styles.Text}>SEND YOUR GPS LOCATION TO:</Text>
           <ScrollView>
             {this.state.nameNum.map(contact => {
               return (
@@ -87,7 +90,7 @@ export class FriendsList extends React.Component {
             })}
           </ScrollView>
           <TouchableOpacity style={styles.button} onPress={() => this.sendSOS()}>
-            <Text style={styles.buttonText}>Send SOS!</Text>
+            <Text style={styles.buttonText}>SEND SOS!</Text>
           </TouchableOpacity>
         </View>
       );

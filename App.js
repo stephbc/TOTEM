@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { HomeScreen } from './components/HomeScreen';
 import { FriendsScreen } from './components/FriendsScreen';
+import { FriendsList } from './components/FriendsList';
 import { TotemScreen } from './components/TotemScreen';
 import { Input } from './components/Input';
 import { SelectPhoto } from './components/SelectPhoto';
@@ -32,7 +33,10 @@ export default App = () => {
           options={{
             title: 'TOTEM',
           }}/>
-        <Stack.Screen name='TOTEM' component={TotemScreen}/>
+        <Stack.Screen name='TOTEM' component={TotemScreen}
+          options={{
+            title: 'MAKE A TOTEM',
+          }}/>
         <Stack.Screen name='SIGN' component={Input}
           options={{
             headerShown: false,
@@ -43,13 +47,20 @@ export default App = () => {
           }}/>
         <Stack.Screen name='PHOTO' component={SelectPhoto}
           options={{
-            headerShown: false,
+            title: 'PICTURE MODE',
           }}/>
         <Stack.Screen name='PhotoSign' component={PhotoSign}
           options={{
             headerShown: false,
           }}/>
-        <Stack.Screen name='FRIENDS' component={FriendsScreen}/>
+        <Stack.Screen name='FRIENDS' component={FriendsScreen}
+          options={{
+            title: 'FIND YOUR FRIENDS',
+          }}/>
+        <Stack.Screen name='FriendsList' component={FriendsList}
+          options={{
+            title: 'YOUR CONTACTS',
+          }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

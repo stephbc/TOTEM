@@ -1,15 +1,21 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../styles';
-import { FriendsList } from './FriendsList'
 // import { FBLoginButton } from './FBLoginButton'
 
-export const FriendsScreen = () => {
-
+export const FriendsScreen = ({ navigation }) => {
   return (
     <View style={styles.view}>
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('FriendsList')}>
+        <Text style={styles.buttonText}>SEND SOS TEXT</Text>
+      </TouchableOpacity>
+
+      {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TOTEM')}>
+        <Text style={styles.buttonText}>CONNECT FACEBOOK</Text>
+      </TouchableOpacity> */}
+
       {/* <FBLoginButton /> */}
-      <FriendsList />
     </View>
   );
 }

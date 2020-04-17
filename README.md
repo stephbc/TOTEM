@@ -9,20 +9,26 @@ An app for festivals, raves and all your nights out!
 
 <!-- ![MainPage](/assets/mainpage.png) -->
 
+<img src="/assets/splash.png" alt="TOTEM"
+	title="TOTEM" width="250" />
+
 <img src="/assets/mainpage.png" alt="MainPage"
-	title="MainPage" width="150" />
+	title="MainPage" width="250" />
 
 <img src="/assets/maketotem.png" alt="MakeTotem"
-	title="MakeTotem" width="150" />
+	title="MakeTotem" width="250" />
 
 <img src="/assets/inputscreen.png" alt="InputScreen"
-	title="InputScreen" width="150" />
+	title="InputScreen" width="250" />
 
 <img src="/assets/signsample1.png" alt="SignSample1"
-	title="SignSample1" width="150" />
+	title="SignSample1" height="250" />
 
 <img src="/assets/signsample2.png" alt="SignSample2"
-	title="SignSample2" width="150" />
+	title="SignSample2" height="250" />
 
 <img src="/assets/picturesign.png" alt="PictureSign"
-	title="PictureSign" width="150" />
+	title="PictureSign" width="250" />
+
+<img src="/assets/friendslist.png" alt="SOSContacts"
+	title="SOSContacts" width="250" />

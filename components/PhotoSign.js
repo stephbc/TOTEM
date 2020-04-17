@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
-import styles from '../styles'
+import styles from '../styles';
 
 export const PhotoSign = (props) => {
   useKeepAwake();

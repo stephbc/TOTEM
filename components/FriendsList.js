@@ -6,7 +6,7 @@ import * as SMS from 'expo-sms';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import styles from '../styles';
-import { FriendsButton } from './FriendsButton'
+import { FriendsButton } from './FriendsButton';
 
 export class FriendsList extends React.Component {
   state = {
@@ -16,7 +16,7 @@ export class FriendsList extends React.Component {
   }
 
   async componentDidMount(){
-    this.getNameNums()
+    this.getNameNums();
     this.getLocationAsync();
   }
 
@@ -29,18 +29,18 @@ export class FriendsList extends React.Component {
           Contacts.Fields.Name,
           Contacts.Fields.PhoneNumbers
         ],
-      })
+      });
 
-      const hasPhoneNum = data.filter(contact => contact.phoneNumbers)
+      const hasPhoneNum = data.filter(contact => contact.phoneNumbers);
 
       this.setState({
         nameNum: hasPhoneNum.map(contact => {
-          let contObj = {}
-          contObj.name = contact.name
-          contObj.number = contact.phoneNumbers[0].number
-          return contObj
-        })
-      })
+          let contObj = {};
+          contObj.name = contact.name;
+          contObj.number = contact.phoneNumbers[0].number;
+          return contObj;
+        }),
+      });
     }
   }
 

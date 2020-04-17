@@ -6,60 +6,73 @@ import styles from '../styles'
 export const FinalSign = (props) => {
   useKeepAwake();
 
-  const [size, setSize] = useState(225)
-  const [viewHeight, setViewHeight] = useState(0)
-  const [textHeight, setTextHeight] = useState(0)
+  const [size, setSize] = useState(225);
+  const [viewHeight, setViewHeight] = useState(0);
+  const [textHeight, setTextHeight] = useState(0);
 
   useEffect(() => {
     if (textHeight > viewHeight) {
-      setSize(size - 0.5) // <<< May adjust 1 to a smaller value so the text can be shrink more precisely?
+      setSize(size - 0.5); // <<< May adjust 1 to a smaller value so the text can be shrink more precisely?
     }
-  }, [textHeight])
+  }, [textHeight]);
 
-  const [flashStart] = useState(new Animated.Value(0))
-  // let taps = 0;
+  let tapped = 0;
+  const [fadeAnim] = useState(new Animated.Value(1));
 
-  // const flashSign = () => {
-    // taps++
-    // if(taps%2){
-    // console.log(taps)
-      // return (
-      //   <View style={{backgroundColor: 'white'}}>
-      //     <Text style={{ color: 'black' }}>
-      //       {props.route.params.value}
-      //     </Text>
-      //   </View>
-      // )
-    // }
-  //   Animated.timing(flashStart, {
-  //     toValue: 1,
-  //     duration: 2000,
-  //     useNativeDriver: true,
-  //   }).start();
-  // }
+  const flashSign = () => {
+    tapped++;
+    if(tapped % 2){
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 300,
+          }),
+          Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 300,
+          })
+        ])
+      ).start();
+    } else {
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 100,
+      }).start();
+    }
+  }
 
   return (
     <View style={styles.view}
       onLayout={(event) => {
-        var { x, y, width, height } = event.nativeEvent.layout;
+        var { height } = event.nativeEvent.layout;
         setViewHeight(height);
-      }}>
-
-      <Text
+      }}
+    >
+      <Animated.View
         style={{
-          fontSize: size,
-          color: 'white',
-          fontWeight: 'bold',
-          textAlign: 'center',
+          ...styles.view,
+          opacity: fadeAnim,
         }}
-        onLayout={(event) => {
-          var { x, y, width, height } = event.nativeEvent.layout;
-          setTextHeight(height);
-        }}
-        // onPress={() => flashSign()}
       >
-        {props.route.params.value}
-      </Text>
+        <Text
+          style={{
+            fontSize: size,
+            color: 'white',
+            fontWeight: 'bold',
+            textAlign: 'center',
+          }}
+          onLayout={(event) => {
+            var { height } = event.nativeEvent.layout;
+            setTextHeight(height);
+          }}
+          onPress={() => flashSign()}
+        >
+
+          {props.route.params.value}
+
+        </Text>
+      </Animated.View>
     </View>
   );
 }

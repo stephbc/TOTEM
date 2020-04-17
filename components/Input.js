@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, View, TouchableOpacity, Text } from 'react-native';
-import styles from '../styles'
+import styles from '../styles';
 import { ScreenOrientation } from 'expo';
 import { useFocusEffect } from '@react-navigation/native';
 

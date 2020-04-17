@@ -58,11 +58,11 @@ export default StyleSheet.create({
     margin: 5,
     alignItems: 'center'
   },
-  flashView: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    alignContent: 'center',
-  },
+  // flashView: {
+  //   flex: 1,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   backgroundColor: 'white',
+  //   alignContent: 'center',
+  // },
 });

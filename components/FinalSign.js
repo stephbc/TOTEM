@@ -27,10 +27,12 @@ export const FinalSign = (props) => {
           Animated.timing(fadeAnim, {
             toValue: 0,
             duration: 300,
+            useNativeDriver: true
           }),
           Animated.timing(fadeAnim, {
             toValue: 1,
             duration: 300,
+            useNativeDriver: true
           })
         ])
       ).start();
@@ -38,6 +40,7 @@ export const FinalSign = (props) => {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 100,
+        useNativeDriver: true
       }).start();
     }
   }

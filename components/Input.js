@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput, View, TouchableOpacity, Text } from 'react-native';
 import styles from '../styles';
-import { ScreenOrientation } from 'expo';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import { useFocusEffect } from '@react-navigation/native';
 
 changeToLandscape = async () => {

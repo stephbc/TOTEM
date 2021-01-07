@@ -8,11 +8,11 @@ export const TotemScreen = ({ navigation }) => {
 
       <TouchableOpacity style={styles.button}
         onPress={() => navigation.navigate('SIGN')}>
-        <Text style={styles.buttonText}>TYPE A SIGN</Text>
+        <Text style={styles.buttonText}>TEXT SIGN</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PHOTO')}>
-        <Text style={styles.buttonText}>PICTURE MODE</Text>
+        <Text style={styles.buttonText}>PICTURE SIGN</Text>
       </TouchableOpacity>
 
     </View>

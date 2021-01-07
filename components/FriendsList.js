@@ -1,6 +1,5 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import * as SMS from 'expo-sms';
 import * as Location from 'expo-location';
@@ -8,21 +7,13 @@ import * as Permissions from 'expo-permissions';
 import styles from '../styles';
 import { FriendsButton } from './FriendsButton';
 
-export class FriendsList extends React.Component {
-  state = {
-    nameNum: [],
-    SOScontacts: [],
-    location: null,
-  }
+export const FriendsList = () => {
+  const [nameNum, setNameNum] = useState([])
+  const [SOScontacts, setSOSContacts] = useState([])
+  const [location, setLocation] = useState(null)
 
-  async componentDidMount(){
-    this.getNameNums();
-    this.getLocationAsync();
-  }
-
-  getNameNums = async () => {
+  const getNameNums = async () => {
     const { status } = await Contacts.requestPermissionsAsync();
-
     if (status === 'granted') {
       const { data } = await Contacts.getContactsAsync({
         fields: [
@@ -30,78 +21,84 @@ export class FriendsList extends React.Component {
           Contacts.Fields.PhoneNumbers
         ],
       });
-
       const hasPhoneNum = data.filter(contact => contact.phoneNumbers);
 
-      this.setState({
-        nameNum: hasPhoneNum.map(contact => {
+      setNameNum(
+        hasPhoneNum.map(contact => {
           let contObj = {};
           contObj.name = contact.name;
           contObj.number = contact.phoneNumbers[0].number;
           return contObj;
-        }),
-      });
+        })
+      );
+    } else {
+        alert("Permission to access Contacts is required.");
+        return;
     }
   }
 
-  getLocationAsync = async () => {
+  const getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status === 'granted') {
       let location = await Location.getCurrentPositionAsync({});
-      this.setState({ location });
+      setLocation(location)
     } else {
-        alert("Permission to access location is required!");
+        alert("Permission to access Location is required.");
         return;
       }
   };
 
-  sendSOS = async () => {
-    if (this.state.location) {
+  useEffect(() => {
+    getNameNums()
+    getLocationAsync()
+  }, [])
+
+  const sendSOS = async () => {
+    if (location) {
       await SMS.sendSMSAsync(
-        this.state.SOScontacts,
+        SOScontacts,
         `SOS! PLEASE COME FIND ME! GPS location:
-        https://www.google.com/maps/search/?api=1&query=${this.state.location.coords.latitude},${this.state.location.coords.longitude}`
+        https://www.google.com/maps/search/?api=1&query=${location.coords.latitude},${location.coords.longitude}`
       )
+    } else {
+        alert("Current GPS location not found!");
+        return;
     }
   }
 
-  render(){
-    // console.log(this.state.SOScontacts)
-    // console.log(this.state.location)
-    if(this.state.nameNum.length) {
-      return (
-        <View style={styles.view}>
-          <Text style={styles.Text}>SEND YOUR GPS LOCATION TO:</Text>
-          <ScrollView>
-            {this.state.nameNum.map(contact => {
-              return (
-                <FriendsButton
-                  key={contact.number}
-                  contact={contact}
-                  onPress={() => {
-                    if(this.state.SOScontacts.includes(contact.number)){
-                      this.setState({ SOScontacts: this.state.SOScontacts.filter(number => contact.number !== number)})
-                    } else {
-                      this.setState({ SOScontacts: [...this.state.SOScontacts, contact.number]})
-                    }
-                  }}
-                />
-              )
-            })}
-          </ScrollView>
-          <TouchableOpacity style={styles.button} onPress={() => this.sendSOS()}>
-            <Text style={styles.buttonText}>SEND SOS!</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    } else {
-      return (
-        <View style={styles.view}>
-          <Text style={styles.Text}>
-            You have no friends :(
-          </Text>
-        </View>
-      )
-    }
+  if(nameNum.length) {
+    return (
+      <View style={styles.view}>
+        <Text style={styles.Text}>SEND GPS LOCATION TO:</Text>
+        <ScrollView>
+          {nameNum.map(contact => {
+            return (
+              <FriendsButton
+                key={contact.number}
+                contact={contact}
+                onPress={() => {
+                  if(SOScontacts.includes(contact.number)){
+                    setSOSContacts(SOScontacts.filter(number => contact.number !== number))
+                  } else {
+                    setSOSContacts([...SOScontacts, contact.number])
+                  }
+                }}
+              />
+            )
+          })}
+        </ScrollView>
+        <Pressable style={styles.button} onPress={() => sendSOS()}>
+          <Text style={styles.buttonText}>SEND SOS!</Text>
+        </Pressable>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.view}>
+        <Text style={styles.Text}>
+          Sorry, no contacts found :(
+        </Text>
+      </View>
+    )
   }
 }

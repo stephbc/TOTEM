@@ -46,7 +46,7 @@ export default App = () => {
           }}/>
         <Stack.Screen name='PHOTO' component={SelectPhoto}
           options={{
-            title: 'PICTURE MODE',
+            title: 'PICTURE SIGN',
           }}/>
         <Stack.Screen name='PhotoSign' component={PhotoSign}
           options={{
@@ -54,7 +54,7 @@ export default App = () => {
           }}/>
         <Stack.Screen name='FRIENDS' component={FriendsScreen}
           options={{
-            title: 'FIND YOUR FRIENDS',
+            title: 'FIND FRIENDS',
           }}/>
       </Stack.Navigator>
     </NavigationContainer>

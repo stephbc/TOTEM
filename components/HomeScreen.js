@@ -11,7 +11,7 @@ export const HomeScreen = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('FRIENDS')}>
-        <Text style={styles.buttonText}>FIND YOUR FRIENDS</Text>
+        <Text style={styles.buttonText}>FIND FRIENDS</Text>
       </TouchableOpacity>
 
     </View>

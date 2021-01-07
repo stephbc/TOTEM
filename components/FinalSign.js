@@ -16,12 +16,12 @@ export const FinalSign = (props) => {
     }
   }, [textHeight]);
 
-  let tapped = 0;
+  let tapped = false;
   const [fadeAnim] = useState(new Animated.Value(1));
 
   const flashSign = () => {
-    tapped++;
-    if(tapped % 2){
+    tapped = !tapped
+    if(tapped){
       Animated.loop(
         Animated.sequence([
           Animated.timing(fadeAnim, {

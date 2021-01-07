@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, TouchableOpacity, Text } from 'react-native';
+import { TextInput, View, TouchableOpacity, Text, Pressable } from 'react-native';
 import styles from '../styles';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useFocusEffect } from '@react-navigation/native';
@@ -26,16 +26,17 @@ export const Input = ({ navigation }) => {
 
   return (
     <View style={styles.view}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="TAP HERE START TYPING"
-        placeholderTextColor="#555555"
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        autoCapitalize="characters"
-        multiline={true}
-        maxLength={50}
-      />
+        <TextInput
+          style={styles.textInput}
+          placeholder="TAP HERE TO START TYPING"
+          placeholderTextColor="#555555"
+          onChangeText={text => onChangeText(text)}
+          value={value}
+          autoCapitalize="characters"
+          multiline={true}
+          maxLength={50}
+        />
+
       <TouchableOpacity style={styles.button}
         onPress={() => {
           if(value){
@@ -43,7 +44,7 @@ export const Input = ({ navigation }) => {
             navigation.navigate('FinalSign', { value: value })
           }
         }}>
-        <Text style={styles.buttonText}>MAKE THIS SIGN!</Text>
+        <Text style={styles.buttonText}>MAKE TOTEM</Text>
       </TouchableOpacity>
     </View>
   );

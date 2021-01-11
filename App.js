@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { HomeScreen } from './components/HomeScreen';
-import { FriendsScreen } from './components/FriendsScreen';
+import { FriendsList } from './components/FriendsList';
 import { TotemScreen } from './components/TotemScreen';
 import { Input } from './components/Input';
 import { SelectPhoto } from './components/SelectPhoto';
@@ -52,7 +52,7 @@ export default App = () => {
           options={{
             headerShown: false,
           }}/>
-        <Stack.Screen name='FRIENDS' component={FriendsScreen}
+        <Stack.Screen name='FRIENDS' component={FriendsList}
           options={{
             title: 'FIND FRIENDS',
           }}/>

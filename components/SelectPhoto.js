@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import * as Permissions from 'expo-permissions';
@@ -46,20 +46,22 @@ export const SelectPhoto = ({ navigation }) => {
     setSelectedImage({ localUri: result.uri });
   }
 
-  if (selectedImage !== null) {
-    navigation.navigate('PhotoSign', { pic: selectedImage });
-  }
+  useEffect(() => {
+    if (selectedImage !== null) {
+      navigation.navigate('PhotoSign', { pic: selectedImage });
+    }
+  })
 
   return (
     <View style={styles.view}>
 
-      <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
+      <Pressable onPress={openImagePickerAsync} style={styles.button}>
         <Text style={styles.buttonText}>CHOOSE FROM GALLERY</Text>
-      </TouchableOpacity>
+      </Pressable>
 
-      <TouchableOpacity onPress={openCameraAsync} style={styles.button}>
+      <Pressable onPress={openCameraAsync} style={styles.button}>
         <Text style={styles.buttonText}>TAKE A PHOTO</Text>
-      </TouchableOpacity>
+      </Pressable>
 
     </View>
   );

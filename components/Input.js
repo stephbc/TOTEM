@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, TouchableOpacity, Text, Pressable } from 'react-native';
+import { TextInput, View, Text, Pressable } from 'react-native';
 import styles from '../styles';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useFocusEffect } from '@react-navigation/native';
@@ -37,7 +37,7 @@ export const Input = ({ navigation }) => {
           maxLength={50}
         />
 
-      <TouchableOpacity style={styles.button}
+      <Pressable style={styles.button}
         onPress={() => {
           if(value){
             changeToLandscape()
@@ -45,7 +45,7 @@ export const Input = ({ navigation }) => {
           }
         }}>
         <Text style={styles.buttonText}>MAKE TOTEM</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

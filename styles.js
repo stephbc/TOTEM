@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const { width } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 export default StyleSheet.create({
   view: {
@@ -34,12 +34,6 @@ export default StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-  photo: {
-    flex: 1,
-    width: width,
-    // height: 450,
-    resizeMode: "contain",
-  },
   scrollText: {
     color: 'white',
     fontSize: 20,
@@ -65,4 +59,21 @@ export default StyleSheet.create({
   //   backgroundColor: 'white',
   //   alignContent: 'center',
   // },
+  // photo: {
+  //   flex: 1,
+  //   width: width,
+  //   // height: 450,
+  //   resizeMode: "contain",
+  // },
+  pinchableImage: {
+    // width: width,
+    height: height,
+    resizeMode: "contain",
+  },
+  wrapper: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'black',
+    alignContent: 'center',
+  }
 });

@@ -1,16 +1,21 @@
 import React from 'react';
-import { View, Image, Animated } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
-import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 import {
   PanGestureHandler,
+  ScrollView,
   PinchGestureHandler,
   RotationGestureHandler,
   State,
 } from 'react-native-gesture-handler';
 
 import styles from '../styles';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+const circleRadius = 30;
 
 export const PhotoSign = (props) => {
   useKeepAwake();
@@ -41,15 +46,26 @@ export const PhotoSign = (props) => {
     { useNativeDriver: true }
   );
 
-  /* Tilt */
-  let tilt = new Animated.Value(0);
-  let tiltStr = tilt.interpolate({
-    inputRange: [-501, -500, 0, 1],
-    outputRange: ['1rad', '1rad', '0rad', '0rad'],
-  });
-  let lastTilt = 0;
-  let onTiltGestureEvent = Animated.event(
-    [{ nativeEvent: { translationY: tilt } }],
+  /* Tap or Pan */
+  let touchX = new Animated.Value(windowWidth / 2 - circleRadius);
+  let touchY = new Animated.Value(windowHeight / 2 - circleRadius);
+  let translateX = Animated.add(
+    touchX,
+    new Animated.Value(-circleRadius)
+  );
+  let translateY = Animated.add(
+    touchY,
+    new Animated.Value(-circleRadius)
+  );
+  let onPanGestureEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          x: touchX,
+          y: touchY
+        },
+      },
+    ],
     { useNativeDriver: true }
   );
 
@@ -67,74 +83,60 @@ export const PhotoSign = (props) => {
       pinchScale.setValue(1);
     }
   };
-  const onTiltGestureStateChange = event => {
-    if (event.nativeEvent.oldState === State.ACTIVE) {
-      lastTilt += event.nativeEvent.translationY;
-      tilt.setOffset(lastTilt);
-      tilt.setValue(0);
+
+  const onTapHandlerStateChange = ({ nativeEvent }) => {
+    if (nativeEvent.oldState === State.ACTIVE) {
+      // Once tap happened we set the position of the circle under the tapped spot
+      touchX.setValue(nativeEvent.x);
+      touchY.setValue(nativeEvent.y);
+
     }
   };
 
   return (
-    <PanGestureHandler
-      ref={panRef}
-      onGestureEvent={onTiltGestureEvent}
-      onHandlerStateChange={onTiltGestureStateChange}
-      minDist={10}
-      minPointers={2}
-      maxPointers={2}
-      avgTouches>
-      <Animated.View style={styles.wrapper}>
-      <RotationGestureHandler
-        ref={rotationRef}
-        simultaneousHandlers={pinchRef}
-        onGestureEvent={onRotateGestureEvent}
-        onHandlerStateChange={onRotateHandlerStateChange}>
-        <Animated.View>
-        <PinchGestureHandler
-          ref={pinchRef}
-          simultaneousHandlers={rotationRef}
-          onGestureEvent={onPinchGestureEvent}
-          onHandlerStateChange={onPinchHandlerStateChange}>
-          <Animated.View collapsable={false}>
-            <Animated.Image
-              style={[
-                styles.pinchableImage,
-                {
-                  transform: [
-                    { perspective: 200 },
-                    { scale: scale },
-                    { rotate: rotateStr },
-                    { rotateX: tiltStr },
-                  ],
-                },
-              ]}
-              source={{ uri: props.route.params.pic.localUri }}
-              // style={styles.photo}
-            />
-          </Animated.View>
-        </PinchGestureHandler>
-        </Animated.View>
-      </RotationGestureHandler>
-      </Animated.View>
-    </PanGestureHandler>
-  )
+    // <ScrollView waitFor={[panRef]}>
+    //   <PanGestureHandler
+    //     ref={panRef}
+    //     activeOffsetX={[-20, 20]}
+    //     onGestureEvent={onPanGestureEvent}
+    //     shouldCancelWhenOutside>
+    //     <Animated.View style={styles.wrapper}>
 
-  // return (
-  //   <View style={styles.view}>
-  //     <ReactNativeZoomableView
-  //         maxZoom={3}
-  //         minZoom={0.5}
-  //         zoomStep={0.5}
-  //         initialZoom={1}
-  //         bindToBorders={true}
-  //         style={styles.view}
-  //       >
-  //         <Image
-  //           source={{ uri: props.route.params.pic.localUri }}
-  //           style={styles.photo}
-  //         />
-  //       </ReactNativeZoomableView>
-  //   </View>
-  // )
+          <RotationGestureHandler
+            ref={rotationRef}
+            simultaneousHandlers={pinchRef}
+            onGestureEvent={onRotateGestureEvent}
+            onHandlerStateChange={onRotateHandlerStateChange}>
+            <Animated.View style={styles.wrapper}>
+            <PinchGestureHandler
+              ref={pinchRef}
+              simultaneousHandlers={rotationRef}
+              onGestureEvent={onPinchGestureEvent}
+              onHandlerStateChange={onPinchHandlerStateChange}>
+              <Animated.View collapsable={false} style={styles.wrapper}>
+                <Animated.Image
+                  style={[
+                    styles.pinchableImage,
+                    {
+                      transform: [
+                        { perspective: 200 },
+                        { scale: scale },
+                        { rotate: rotateStr },
+                        // { translateX: translateX },
+                        // { translateY: translateY },
+                      ],
+                    },
+                  ]}
+                  source={{ uri: props.route.params.pic.localUri }}
+                />
+              </Animated.View>
+            </PinchGestureHandler>
+            </Animated.View>
+          </RotationGestureHandler>
+
+    //     </Animated.View>
+    //   </PanGestureHandler>
+    //  </ScrollView>
+
+  )
 }

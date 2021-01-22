@@ -52,21 +52,9 @@ export default StyleSheet.create({
     margin: 5,
     alignItems: 'center'
   },
-  // flashView: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   backgroundColor: 'white',
-  //   alignContent: 'center',
-  // },
-  // photo: {
-  //   flex: 1,
-  //   width: width,
-  //   // height: 450,
-  //   resizeMode: "contain",
-  // },
+
   pinchableImage: {
-    // width: width,
+  //   width: width,
     height: height,
     resizeMode: "contain",
   },
@@ -74,6 +62,6 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     backgroundColor: 'black',
-    alignContent: 'center',
+    // alignContent: 'center',
   }
 });

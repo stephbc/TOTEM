@@ -19,9 +19,9 @@ export default StyleSheet.create({
   textInput: {
     color: 'white',
     flex: 1,
-    fontSize: 75,
+    fontSize: 60,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   button: {
     backgroundColor: '#F56960',
@@ -52,9 +52,7 @@ export default StyleSheet.create({
     margin: 5,
     alignItems: 'center'
   },
-
   pinchableImage: {
-  //   width: width,
     height: height,
     resizeMode: "contain",
   },
@@ -62,6 +60,5 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     backgroundColor: 'black',
-    // alignContent: 'center',
   }
 });

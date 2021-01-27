@@ -34,7 +34,7 @@ export const Input = ({ navigation }) => {
           value={value}
           autoCapitalize="characters"
           multiline={true}
-          maxLength={50}
+          maxLength={40}
         />
 
       <Pressable style={styles.button}

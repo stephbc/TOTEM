@@ -12,7 +12,7 @@ export const FinalSign = (props) => {
 
   useEffect(() => {
     if (textHeight > viewHeight) {
-      setSize(size - 0.5); // <<< May adjust 1 to a smaller value so the text can be shrink more precisely?
+      setSize(size - 1); // <<< May adjust 1 to a smaller value so the text can be shrink more precisely?
     }
   }, [textHeight]);
 
@@ -70,6 +70,7 @@ export const FinalSign = (props) => {
             setTextHeight(height);
           }}
           onPress={() => flashSign()}
+          textBreakStrategy={'simple'}
         >
 
           {props.route.params.value}

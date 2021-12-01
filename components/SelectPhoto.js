@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { Text, View, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
-import * as Permissions from 'expo-permissions';
+import { Camera } from 'expo-camera';
 import styles from '../styles.js';
 
 export const SelectPhoto = ({ navigation }) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
 
   const openImagePickerAsync = async () => {
-    const { status } = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+    const { status } = await Camera.requestPermissionsAsync();
     if (status !== 'granted') {
       alert("Permission to access camera roll is required!");
       return;
@@ -23,10 +23,7 @@ export const SelectPhoto = ({ navigation }) => {
   }
 
   const openCameraAsync = async () => {
-    const { status } = await Permissions.getAsync(
-      Permissions.CAMERA,
-      Permissions.CAMERA_ROLL
-    );
+    const { status } = await Camera.requestPermissionsAsync();
     if (status !== 'granted') {
       alert("Permission to access camera is required!");
       return;

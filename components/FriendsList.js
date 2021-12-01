@@ -3,7 +3,6 @@ import { View, Text, ScrollView, Pressable } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import * as SMS from 'expo-sms';
 import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
 import styles from '../styles';
 import { FriendsButton } from './FriendsButton';
 
@@ -38,7 +37,7 @@ export const FriendsList = () => {
   }
 
   const getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    let { status } = await Location.requestPermissionsAsync();
     if (status === 'granted') {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location)

@@ -9,7 +9,7 @@ export const SelectPhoto = ({ navigation }) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
 
   const openImagePickerAsync = async () => {
-    const { status } = await Camera.requestPermissionsAsync();
+    const { status } = await Camera.requestCameraPermissionsAsync();
     if (status !== 'granted') {
       alert("Permission to access camera roll is required!");
       return;
@@ -23,7 +23,7 @@ export const SelectPhoto = ({ navigation }) => {
   }
 
   const openCameraAsync = async () => {
-    const { status } = await Camera.requestPermissionsAsync();
+    const { status } = await Camera.requestCameraPermissionsAsync();
     if (status !== 'granted') {
       alert("Permission to access camera is required!");
       return;

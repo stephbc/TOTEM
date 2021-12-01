@@ -37,7 +37,7 @@ export const FriendsList = () => {
   }
 
   const getLocationAsync = async () => {
-    let { status } = await Location.requestPermissionsAsync();
+    let { status } = await Location.requestForegroundPermissionsAsync();
     if (status === 'granted') {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location)

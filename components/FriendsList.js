@@ -87,7 +87,9 @@ export const FriendsList = () => {
             )
           })}
         </ScrollView>
-        <Pressable style={styles.button} onPress={() => sendSOS()}>
+        <Pressable
+            style={({pressed}) => pressed ? styles.pressedButton : styles.button}
+            onPress={() => sendSOS()}>
           <Text style={styles.buttonText}>SEND SOS!</Text>
         </Pressable>
       </View>

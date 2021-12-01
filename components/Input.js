@@ -37,7 +37,8 @@ export const Input = ({ navigation }) => {
           maxLength={40}
         />
 
-      <Pressable style={styles.button}
+      <Pressable
+        style={({pressed}) => pressed ? styles.pressedButton : styles.button}
         onPress={() => {
           if(value){
             changeToLandscape()

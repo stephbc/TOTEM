@@ -55,11 +55,15 @@ export const SelectPhoto = ({ navigation }) => {
   return (
     <View style={styles.view}>
 
-      <Pressable onPress={openImagePickerAsync} style={styles.button}>
+      <Pressable
+          onPress={openImagePickerAsync}
+          style={({pressed}) => pressed ? styles.pressedButton : styles.button}>
         <Text style={styles.buttonText}>CHOOSE FROM GALLERY</Text>
       </Pressable>
 
-      <Pressable onPress={openCameraAsync} style={styles.button}>
+      <Pressable
+          onPress={openCameraAsync}
+          style={({pressed}) => pressed ? styles.pressedButton : styles.button}>
         <Text style={styles.buttonText}>TAKE A PHOTO</Text>
       </Pressable>
 

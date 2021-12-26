@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Animated } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
 import styles from '../styles'
 
 export const FinalSign = (props) => {
   useKeepAwake();
-
-  const [size, setSize] = useState(225);
-  const [viewHeight, setViewHeight] = useState(0);
-  const [textHeight, setTextHeight] = useState(0);
-
-  useEffect(() => {
-    if (textHeight > viewHeight) {
-      setSize(size - 1); // <<< May adjust 1 to a smaller value so the text can be shrink more precisely?
-    }
-  }, [textHeight]);
 
   let tapped = false;
   const [fadeAnim] = useState(new Animated.Value(1));
@@ -45,36 +35,31 @@ export const FinalSign = (props) => {
     }
   }
 
+  const [fontSize, setFontSize] = useState(225);
+  const numberOfLines = 3
+
   return (
-    <View style={styles.view}
-      onLayout={(event) => {
-        var { height } = event.nativeEvent.layout;
-        setViewHeight(height);
-      }}
-    >
+    <View style={styles.view}>
       <Animated.View
         style={{
           ...styles.view,
-          opacity: fadeAnim,
-        }}
-      >
+          opacity: fadeAnim }}>
         <Text
+          adjustsFontSizeToFit
+          numberOfLines={numberOfLines}
+          textBreakStrategy={'simple'}
           style={{
-            fontSize: size,
+            fontSize: fontSize,
             color: 'white',
             fontWeight: 'bold',
-            textAlign: 'center',
-          }}
-          onLayout={(event) => {
-            var { height } = event.nativeEvent.layout;
-            setTextHeight(height);
-          }}
-          onPress={() => flashSign()}
-          textBreakStrategy={'simple'}
-        >
-
+            textAlign: 'center' }}
+          onTextLayout={(event) => {
+            const { lines } = event.nativeEvent;
+            if (lines.length > numberOfLines && fontSize > 100) {
+              setFontSize(fontSize - 1);
+            }}}
+          onPress={() => flashSign()} >
           {props.route.params.value}
-
         </Text>
       </Animated.View>
     </View>

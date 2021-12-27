@@ -1,14 +1,14 @@
 import React from 'react';
-import { TextInput, View, Text, Pressable } from 'react-native';
+import { TextInput, View, Text, Pressable, Keyboard } from 'react-native';
 import styles from '../styles';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useFocusEffect } from '@react-navigation/native';
 
-changeToLandscape = async () => {
+const changeToLandscape = async () => {
   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
 }
 
-changeToPortrait = async () => {
+const changeToPortrait = async () => {
   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
 }
 
@@ -19,7 +19,7 @@ export const Input = ({ navigation }) => {
     React.useCallback(() => {
       changeToPortrait();
       return () => {
-        ScreenOrientation.removeOrientationChangeListeners()
+        ScreenOrientation.removeOrientationChangeListeners();
       };
     }, [])
   );
@@ -40,9 +40,10 @@ export const Input = ({ navigation }) => {
       <Pressable
         style={({pressed}) => pressed ? styles.pressedButton : styles.button}
         onPress={() => {
-          if(value){
-            changeToLandscape()
-            navigation.navigate('FinalSign', { value: value })
+          if (value) {
+            Keyboard.dismiss();
+            navigation.navigate('FinalSign', { value: value });
+            changeToLandscape();
           }
         }}>
         <Text style={styles.buttonText}>MAKE TOTEM</Text>

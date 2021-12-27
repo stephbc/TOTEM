@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Animated } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
 import styles from '../styles'
@@ -6,8 +6,8 @@ import styles from '../styles'
 export const FinalSign = (props) => {
   useKeepAwake();
 
-  let tapped = false;
   const [fadeAnim] = useState(new Animated.Value(1));
+  let tapped = false;
 
   const flashSign = () => {
     tapped = !tapped
@@ -36,13 +36,6 @@ export const FinalSign = (props) => {
   };
 
   const [currentFont, setFontSize] = useState(225);
-  let numberOfLines = 3;
-
-  useEffect(() => {
-    if (numberOfLines > 3 && currentFont > 75) {
-      setFontSize(currentFont - 1);
-    }
-  }, [currentFont]);
 
   return (
     <View style={styles.view}>
@@ -52,19 +45,18 @@ export const FinalSign = (props) => {
           opacity: fadeAnim }}>
         <Text
           numberOfLines={3}
-          adjustsFontSizeToFit
-          textBreakStrategy={'simple'}
+          // adjustsFontSizeToFit
           style={{
             fontSize: currentFont,
             color: 'white',
             fontWeight: 'bold',
             textAlign: 'center' }}
           onTextLayout={(event) => {
-            numberOfLines = event.nativeEvent.lines.length;
-            if (numberOfLines > 3 && currentFont > 75) {
+            const currentLines = event.nativeEvent.lines.length;
+            if (currentLines > 3 && currentFont > 75) {
               setFontSize(currentFont - 1);
-            }
-          }}
+            }}}
+          textBreakStrategy={'simple'}
           onPress={() => flashSign()}>
           {props.route.params.value}
         </Text>

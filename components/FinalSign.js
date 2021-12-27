@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Animated } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
 import styles from '../styles'
@@ -33,10 +33,16 @@ export const FinalSign = (props) => {
         useNativeDriver: true
       }).start();
     }
-  }
+  };
 
-  const [fontSize, setFontSize] = useState(225);
-  const numberOfLines = 3
+  const [currentFont, setFontSize] = useState(225);
+  let numberOfLines = 3;
+
+  useEffect(() => {
+    if (numberOfLines > 3 && currentFont > 75) {
+      setFontSize(currentFont - 1);
+    }
+  }, [currentFont]);
 
   return (
     <View style={styles.view}>
@@ -45,20 +51,21 @@ export const FinalSign = (props) => {
           ...styles.view,
           opacity: fadeAnim }}>
         <Text
+          numberOfLines={3}
           adjustsFontSizeToFit
-          numberOfLines={numberOfLines}
           textBreakStrategy={'simple'}
           style={{
-            fontSize: fontSize,
+            fontSize: currentFont,
             color: 'white',
             fontWeight: 'bold',
             textAlign: 'center' }}
           onTextLayout={(event) => {
-            const { lines } = event.nativeEvent;
-            if (lines.length > numberOfLines && fontSize > 100) {
-              setFontSize(fontSize - 1);
-            }}}
-          onPress={() => flashSign()} >
+            numberOfLines = event.nativeEvent.lines.length;
+            if (numberOfLines > 3 && currentFont > 75) {
+              setFontSize(currentFont - 1);
+            }
+          }}
+          onPress={() => flashSign()}>
           {props.route.params.value}
         </Text>
       </Animated.View>

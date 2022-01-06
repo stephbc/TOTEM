@@ -1,15 +1,15 @@
 import React from 'react';
 import { TextInput, View, Text, Pressable, Keyboard } from 'react-native';
-import styles from '../styles';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useFocusEffect } from '@react-navigation/native';
-
-const changeToLandscape = async () => {
-  await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
-}
+import styles from '../styles';
 
 const changeToPortrait = async () => {
   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+}
+
+const changeToLandscape = async () => {
+  await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
 }
 
 export const Input = ({ navigation }) => {
@@ -40,8 +40,8 @@ export const Input = ({ navigation }) => {
       <Pressable
         style={({pressed}) => pressed ? styles.pressedButton : styles.button}
         onPress={() => {
+          Keyboard.dismiss();
           if (value) {
-            Keyboard.dismiss();
             navigation.navigate('FinalSign', { value: value });
             changeToLandscape();
           }

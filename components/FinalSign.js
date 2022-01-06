@@ -45,7 +45,7 @@ export const FinalSign = (props) => {
           opacity: fadeAnim }}>
         <Text
           numberOfLines={3}
-          // adjustsFontSizeToFit
+          adjustsFontSizeToFit
           style={{
             fontSize: currentFont,
             color: 'white',

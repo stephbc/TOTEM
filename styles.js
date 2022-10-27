@@ -53,6 +53,16 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
+  friendsSearchInput: {
+    backgroundColor: 'white',
+    color: 'black',
+    width: 300,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 10,
+    margin: 5,
+    alignItems: 'center'
+  },
   contactButton: {
     backgroundColor: '#B3B3B3',
     padding: 10,

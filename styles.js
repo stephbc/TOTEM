@@ -49,6 +49,32 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  sendButton: {
+    backgroundColor: '#F56960',
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+    borderRadius: 100,
+    margin: 20,
+  },
+  disabledSendButton: {
+    backgroundColor: '#F89690',
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+    borderRadius: 100,
+    margin: 20,
+  },
+  sendButtonText: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   scrollText: {
     color: 'white',
     fontSize: 20,
@@ -56,12 +82,12 @@ export default StyleSheet.create({
   friendsSearchInput: {
     backgroundColor: 'white',
     color: 'black',
-    width: 300,
+    width: 275,
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 10,
     margin: 5,
-    alignItems: 'center'
+    marginBottom: 15,
   },
   contactButton: {
     backgroundColor: '#B3B3B3',

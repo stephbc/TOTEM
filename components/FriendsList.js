@@ -7,11 +7,11 @@ import styles from '../styles';
 import { FriendsButton } from './FriendsButton';
 
 export const FriendsList = () => {
-  const [allContacts, setAllContacts] = useState([])
-  const [visibleContacts, setVisibleContacts] = useState([])
-  const [SOScontacts, setSOSContacts] = useState([])
-  const [location, setLocation] = useState(null)
-  const [searchTerm] = useState(null)
+  const [allContacts, setAllContacts] = useState([]);
+  const [visibleContacts, setVisibleContacts] = useState([]);
+  const [SOScontacts, setSOSContacts] = useState([]);
+  const [location, setLocation] = useState(null);
+  const [searchTerm] = useState(null);
 
   const getAllContacts = async () => {
     const { status } = await Contacts.requestPermissionsAsync();
@@ -28,39 +28,39 @@ export const FriendsList = () => {
         contObj.name = contact.name;
         contObj.number = contact.phoneNumbers[0].number;
         return contObj;
-      })
+      });
       setAllContacts(formattedContacts);
-      setVisibleContacts(formattedContacts)
+      setVisibleContacts(formattedContacts);
     } else {
-        alert("Permission to access Contacts is required.");
-        return;
+      alert("Permission to access Contacts is required.");
+      return;
     }
-  }
+  };
 
   const handleSearch = (text) => {
     if (text) {
-      const searchFiltered = allContacts.filter(contact => contact.name.toLowerCase().includes(text.toLowerCase()))
-      setVisibleContacts(searchFiltered)
+      const searchFiltered = allContacts.filter(contact => contact.name.toLowerCase().includes(text.toLowerCase()));
+      setVisibleContacts(searchFiltered);
     } else {
-      setVisibleContacts(allContacts)
+      setVisibleContacts(allContacts);
     }
-  }
+  };
 
   const getLocationAsync = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status === 'granted') {
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location)
+      setLocation(location);
     } else {
-        alert("Permission to access Location is required.");
-        return;
-      }
+      alert("Permission to access Location is required.");
+      return;
+    }
   };
 
   useEffect(() => {
-    getAllContacts()
-    getLocationAsync()
-  }, [])
+    getAllContacts();
+    getLocationAsync();
+  }, []);
 
   const sendSOS = async () => {
     if (location) {
@@ -68,12 +68,12 @@ export const FriendsList = () => {
         SOScontacts,
         `SOS! PLEASE COME FIND ME! GPS location:
         https://www.google.com/maps/search/?api=1&query=${location.coords.latitude},${location.coords.longitude}`
-      )
+      );
     } else {
-        alert("Current GPS location not found!");
-        return;
+      alert("Current GPS location not found!");
+      return;
     }
-  }
+  };
 
   if (!allContacts.length) {
     return (
@@ -111,11 +111,12 @@ export const FriendsList = () => {
           })}
         </ScrollView>
         <Pressable
-            style={({pressed}) => pressed ? styles.pressedButton : styles.button}
+            disabled={!SOScontacts.length}
+            style={() => SOScontacts.length ? styles.sendButton : styles.disabledSendButton}
             onPress={() => sendSOS()}>
-          <Text style={styles.buttonText}>SEND SOS!</Text>
+          <Text style={styles.sendButtonText}>SEND SOS!</Text>
         </Pressable>
       </View>
-    );
+    )
   }
-}
+};

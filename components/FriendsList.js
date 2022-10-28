@@ -66,8 +66,9 @@ export const FriendsList = () => {
     if (location) {
       await SMS.sendSMSAsync(
         SOScontacts,
-        `SOS! PLEASE COME FIND ME! GPS location:
-        https://www.google.com/maps/search/?api=1&query=${location.coords.latitude},${location.coords.longitude}`
+        `SOS! PLEASE COME FIND ME!
+        Timestamp: ${new Date()}
+        My Location: https://www.google.com/maps/search/?api=1&query=${location.coords.latitude},${location.coords.longitude}`
       );
     } else {
       alert("Current GPS location not found!");

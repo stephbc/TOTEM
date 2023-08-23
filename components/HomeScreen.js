@@ -20,25 +20,21 @@ export const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.view}>
-
       <Pressable
           style={({pressed}) => pressed ? styles.pressedButton : styles.button}
-          onPress={() => navigation.navigate('TOTEM')}>
-        <Text style={styles.buttonText}>MAKE A TOTEM</Text>
+          onPress={() => navigation.navigate('Input')}>
+        <Text style={styles.buttonText}>MAKE A SIGN</Text>
       </Pressable>
-
       <Pressable
           style={({pressed}) => pressed ? styles.pressedButton : styles.button}
-          onPress={() => navigation.navigate('FRIENDS')}>
+          onPress={() => navigation.navigate('Friends')}>
         <Text style={styles.buttonText}>FIND FRIENDS</Text>
       </Pressable>
-
       <Pressable
           style={({pressed}) => pressed ? styles.pressedButton : styles.button}
           onPress={() => playSound()}>
         <Text style={styles.buttonText}>PLAY AIR HORN</Text>
       </Pressable>
-
     </View>
   );
 }

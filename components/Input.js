@@ -7,17 +7,16 @@ export const Input = ({ navigation }) => {
 
   return (
     <View style={styles.view}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="TAP HERE TO START TYPING"
-          placeholderTextColor="#555555"
-          onChangeText={text => onChangeText(text)}
-          value={value}
-          autoCapitalize="characters"
-          multiline={true}
-          maxLength={40}
-        />
-
+      <TextInput
+        style={styles.textInput}
+        autoFocus={true}
+        placeholderTextColor="#555555"
+        onChangeText={text => onChangeText(text)}
+        value={value}
+        autoCapitalize="characters"
+        multiline={true}
+        maxLength={40}
+      />
       <Pressable
         style={({pressed}) => pressed ? styles.pressedButton : styles.button}
         onPress={() => {

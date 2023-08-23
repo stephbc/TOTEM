@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useFocusEffect } from 'react';
-import { View, Text, Animated } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Animated, Dimensions } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
 import styles from '../styles'
 
 export const FinalSign = (props) => {
   useKeepAwake();
+  const signText = props.route.params.value;
 
   const [fadeAnim] = useState(new Animated.Value(1));
   let tapped = false;
@@ -44,7 +45,7 @@ export const FinalSign = (props) => {
           ...styles.view,
           opacity: fadeAnim }}>
         <Text
-          // numberOfLines={2}
+          // numberOfLines={1}
           adjustsFontSizeToFit
           style={{
             transform: [{ rotate: '90deg'}],
@@ -53,13 +54,15 @@ export const FinalSign = (props) => {
             fontWeight: 'bold',
             textAlign: 'center' }}
           onTextLayout={(event) => {
-            const currentLines = event.nativeEvent.lines.length;
-            if (currentLines > 2 && currentFont > 75) {
-              setFontSize(currentFont - 1);
+            // const currentLines = event.nativeEvent.lines.length;
+            if (currentFont > 75) {
+              const { width, height } = Dimensions.get('window')
+              const fontSize = Math.sqrt(height * width / signText.length) - 5
+              setFontSize(fontSize);
             }}}
           textBreakStrategy={'simple'}
           onPress={() => flashSign()}>
-          {props.route.params.value}
+          {signText}
         </Text>
       </Animated.View>
     </View>

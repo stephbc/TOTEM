@@ -5,15 +5,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { HomeScreen } from './components/HomeScreen';
 import { FriendsList } from './components/FriendsList';
-import { TotemScreen } from './components/TotemScreen';
 import { Input } from './components/Input';
-import { SelectPhoto } from './components/SelectPhoto';
 import { FinalSign } from './components/FinalSign';
-import { PhotoSign } from './components/PhotoSign';
-
-const Stack = createStackNavigator();
+// import { TotemScreen } from './components/TotemScreen';
+// import { SelectPhoto } from './components/SelectPhoto';
+// import { PhotoSign } from './components/PhotoSign';
 
 export default App = () => {
+  const Stack = createStackNavigator();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -32,17 +32,17 @@ export default App = () => {
           options={{
             title: 'TOTEM',
           }}/>
-        <Stack.Screen name='TOTEM' component={TotemScreen}
-          options={{
-            title: 'MAKE A TOTEM',
-          }}/>
-        <Stack.Screen name='SIGN' component={Input}
+        <Stack.Screen name='Input' component={Input}
           options={{
             headerShown: false,
           }}/>
         <Stack.Screen name='FinalSign' component={FinalSign}
           options={{
             headerShown: false,
+          }}/>
+        {/* <Stack.Screen name='TOTEM' component={TotemScreen}
+          options={{
+            title: 'MAKE A TOTEM',
           }}/>
         <Stack.Screen name='PHOTO' component={SelectPhoto}
           options={{
@@ -51,8 +51,8 @@ export default App = () => {
         <Stack.Screen name='PhotoSign' component={PhotoSign}
           options={{
             headerShown: false,
-          }}/>
-        <Stack.Screen name='FRIENDS' component={FriendsList}
+          }}/> */}
+        <Stack.Screen name='Friends' component={FriendsList}
           options={{
             title: 'FIND FRIENDS',
           }}/>

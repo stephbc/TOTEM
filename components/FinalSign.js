@@ -1,19 +1,10 @@
 import React, { useState, useEffect, useFocusEffect } from 'react';
 import { View, Text, Animated } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
-import * as ScreenOrientation from 'expo-screen-orientation';
 import styles from '../styles'
 
 export const FinalSign = (props) => {
   useKeepAwake();
-
-  const changeToLandscape = async () => {
-    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
-  }
-
-  const changeToPortrait = async () => {
-    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
-  }
 
   const [fadeAnim] = useState(new Animated.Value(1));
   let tapped = false;
@@ -46,14 +37,6 @@ export const FinalSign = (props) => {
 
   const [currentFont, setFontSize] = useState(225);
 
-  useEffect(() => {
-    changeToLandscape();
-    return () => {
-      changeToPortrait();
-      ScreenOrientation.removeOrientationChangeListeners();
-    };
-  }, []);
-
   return (
     <View style={styles.view}>
       <Animated.View
@@ -61,16 +44,17 @@ export const FinalSign = (props) => {
           ...styles.view,
           opacity: fadeAnim }}>
         <Text
-          numberOfLines={3}
+          // numberOfLines={2}
           adjustsFontSizeToFit
           style={{
+            transform: [{ rotate: '90deg'}],
             fontSize: currentFont,
             color: 'white',
             fontWeight: 'bold',
             textAlign: 'center' }}
           onTextLayout={(event) => {
             const currentLines = event.nativeEvent.lines.length;
-            if (currentLines > 3 && currentFont > 75) {
+            if (currentLines > 2 && currentFont > 75) {
               setFontSize(currentFont - 1);
             }}}
           textBreakStrategy={'simple'}

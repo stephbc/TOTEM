@@ -29,7 +29,7 @@ export const Input = ({ navigation }) => {
             navigation.navigate('FinalSign', { value: value });
           }
         }}>
-        <Text style={styles.buttonText}>MAKE TOTEM</Text>
+        <Text style={styles.buttonText}>TOTEM TIME!</Text>
       </Pressable>
     </View>
   );

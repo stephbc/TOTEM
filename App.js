@@ -30,11 +30,12 @@ export default App = () => {
       >
         <Stack.Screen name='Home' component={HomeScreen}
           options={{
-            title: 'TOTEM',
+            // title: 'TOTEM',
+            headerShown: false,
           }}/>
         <Stack.Screen name='Input' component={Input}
           options={{
-            headerShown: false,
+            title: '',
           }}/>
         <Stack.Screen name='FinalSign' component={FinalSign}
           options={{
@@ -54,7 +55,7 @@ export default App = () => {
           }}/> */}
         <Stack.Screen name='Friends' component={FriendsList}
           options={{
-            title: 'FIND FRIENDS',
+            title: 'SEND YOUR LOCATION',
           }}/>
       </Stack.Navigator>
     </NavigationContainer>

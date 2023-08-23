@@ -87,7 +87,6 @@ export const FriendsList = () => {
   } else {
     return (
       <View style={styles.view}>
-        <Text style={styles.Text}>SEND GPS LOCATION TO:</Text>
         <TextInput
           style={styles.friendsSearchInput}
           onChangeText={handleSearch}
@@ -135,7 +134,7 @@ const styles = createStyles({
   sendButton: {
     backgroundColor: colors.primary,
     width: dimensions.fullWidth * 0.33,
-    height: dimensions.fullHeight * 0.12,
+    height: dimensions.fullHeight * 0.08,
     justifyContent: 'center',
     alignItems: 'center',
     padding: padding.sm,

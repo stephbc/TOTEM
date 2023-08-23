@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, Animated, Dimensions } from 'react-native';
+import { View, Text, Animated } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
-import createStyles from '../styles';
+import createStyles, { dimensions } from '../styles';
 
 export const FinalSign = (props) => {
   useKeepAwake();
@@ -11,7 +11,7 @@ export const FinalSign = (props) => {
   let tapped = false;
 
   const flashSign = () => {
-    tapped = !tapped
+    tapped = !tapped;
     if(tapped){
       Animated.loop(
         Animated.sequence([
@@ -36,31 +36,32 @@ export const FinalSign = (props) => {
     }
   };
 
-  const [currentFont, setFontSize] = useState(225);
+  const [currentFont, setFontSize] = useState(500);
 
   return (
     <View style={styles.view}>
       <Animated.View
         style={{
           ...styles.view,
-          opacity: fadeAnim }}>
+          opacity: fadeAnim,
+          transform: [{ rotate: '90deg'}] }}>
         <Text
-          // numberOfLines={1}
+          numberOfLines={1}
           adjustsFontSizeToFit
+          allowFontScaling
           style={{
-            transform: [{ rotate: '90deg'}],
             fontSize: currentFont,
             color: 'white',
             fontWeight: 'bold',
             textAlign: 'center' }}
-          onTextLayout={(event) => {
-            // const currentLines = event.nativeEvent.lines.length;
-            if (currentFont > 75) {
-              const { width, height } = Dimensions.get('window')
-              const fontSize = Math.sqrt(height * width / signText.length) - 5
-              setFontSize(fontSize);
-            }}}
-          textBreakStrategy={'simple'}
+          // onTextLayout={() => {
+          //   if (currentFont > 75) {
+          //     const rotatedWidth = dimensions.fullHeight * 0.9;
+          //     const rotatedHeight = dimensions.fullWidth * 0.9;
+          //     const fontSize = Math.sqrt(rotatedHeight * rotatedWidth / signText.length) - 1
+          //     console.log(fontSize)
+          //     setFontSize(fontSize);
+          //   }}}
           onPress={() => flashSign()}>
           {signText}
         </Text>

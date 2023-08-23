@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Pressable, TextInput } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import * as SMS from 'expo-sms';
 import * as Location from 'expo-location';
-import styles from '../styles';
+import createStyles, { colors, padding, fonts, dimensions } from '../styles';
 import { FriendsButton } from './FriendsButton';
 
 export const FriendsList = () => {
@@ -121,3 +121,41 @@ export const FriendsList = () => {
     )
   }
 };
+
+const styles = createStyles({
+  friendsSearchInput: {
+    backgroundColor: 'white',
+    color: 'black',
+    width: dimensions.fullWidth * 0.75,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: padding.sm,
+    marginBottom: 15,
+  },
+  sendButton: {
+    backgroundColor: colors.primary,
+    width: dimensions.fullWidth * 0.33,
+    height: dimensions.fullHeight * 0.12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: padding.sm,
+    borderRadius: 25,
+    margin: padding.md,
+  },
+  disabledSendButton: {
+    backgroundColor: colors.secondary,
+    width: dimensions.fullWidth * 0.33,
+    height: dimensions.fullHeight * 0.08,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: padding.sm,
+    borderRadius: 25,
+    margin: padding.md,
+  },
+  sendButtonText: {
+    fontSize: fonts.sm,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});

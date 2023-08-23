@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Animated, Dimensions } from 'react-native';
 import { useKeepAwake } from 'expo-keep-awake';
-import styles from '../styles'
+import createStyles from '../styles';
 
 export const FinalSign = (props) => {
   useKeepAwake();
@@ -67,4 +67,6 @@ export const FinalSign = (props) => {
       </Animated.View>
     </View>
   );
-}
+};
+
+const styles = createStyles();

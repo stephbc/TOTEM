@@ -36,32 +36,20 @@ export const FinalSign = (props) => {
     }
   };
 
-  const [currentFont, setFontSize] = useState(500);
-
   return (
     <View style={styles.view}>
       <Animated.View
         style={{
           ...styles.view,
+          width: dimensions.fullHeight,
+          height: dimensions.fullWidth,
           opacity: fadeAnim,
           transform: [{ rotate: '90deg'}] }}>
         <Text
-          numberOfLines={1}
-          adjustsFontSizeToFit
-          allowFontScaling
-          style={{
-            fontSize: currentFont,
-            color: 'white',
-            fontWeight: 'bold',
-            textAlign: 'center' }}
-          // onTextLayout={() => {
-          //   if (currentFont > 75) {
-          //     const rotatedWidth = dimensions.fullHeight * 0.9;
-          //     const rotatedHeight = dimensions.fullWidth * 0.9;
-          //     const fontSize = Math.sqrt(rotatedHeight * rotatedWidth / signText.length) - 1
-          //     console.log(fontSize)
-          //     setFontSize(fontSize);
-          //   }}}
+          numberOfLines={signText.length >= 10 ? 2 : 1}
+          textBreakStrategy={'balanced'}
+          adjustsFontSizeToFit={true}
+          style={styles.sign}
           onPress={() => flashSign()}>
           {signText}
         </Text>
@@ -70,4 +58,11 @@ export const FinalSign = (props) => {
   );
 };
 
-const styles = createStyles();
+const styles = createStyles({
+    sign: {
+      fontSize: 500,
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center'
+  },
+});

@@ -62,12 +62,14 @@ export const FriendsList = () => {
     getLocationAsync();
   }, []);
 
+  const timeStamp = new Date();
+
   const sendSOS = async () => {
     if (location) {
       await SMS.sendSMSAsync(
         SOScontacts,
         `SOS! PLEASE COME FIND ME!
-        Timestamp: ${new Date()}
+        Timestamp: ${timeStamp.toLocaleTimeString()}
         My Location: https://www.google.com/maps/search/?api=1&query=${location.coords.latitude},${location.coords.longitude}`
       );
     } else {
@@ -80,7 +82,7 @@ export const FriendsList = () => {
     return (
       <View style={styles.view}>
         <Text style={styles.Text}>
-          Sorry, no contacts found :(
+          Sorry, no contacts found!
         </Text>
       </View>
     )

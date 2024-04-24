@@ -38,8 +38,8 @@ const baseStyles = {
     justifyContent: 'center',
     alignItems: 'center',
     padding: padding.md,
-    borderRadius: 100,
-    margin: 50,
+    borderRadius: 50,
+    margin: 25,
   },
   buttonText: {
     fontSize: fonts.sm,

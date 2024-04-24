@@ -19,8 +19,11 @@ export const Input = ({ navigation }) => {
         value={value}
         autoCapitalize="characters"
         multiline={true}
-        maxLength={40}
+        maxLength={25}
       />
+      <Text style={styles.inputLimit}>
+        {25 - value.length} characters remaining
+      </Text>
       <Pressable
         style={({pressed}) => buttonStyling(pressed)}
         onPress={() => {
@@ -42,5 +45,10 @@ const styles = createStyles({
     fontSize: fonts.lg,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  inputLimit: {
+    color: 'grey',
+    fontSize: fonts.sm,
+    margin: 10,
   },
 });

@@ -22,7 +22,7 @@ const styles = createStyles({
   contactButton: {
     backgroundColor: colors.secondary,
     padding: padding.sm,
-    borderRadius: 15,
+    borderRadius: 25,
     margin: 5,
     alignItems: 'center',
     width: dimensions.fullWidth * 0.5,
